@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Printable A4 sheet */
+.resume-a4 {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background: #fff;
+  color: #000;
+}
+
+/* Remove chrome for print */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body { background: #fff !important; }
+  .resume-a4 { width: auto; min-height: auto; box-shadow: none; }
+  header, nav, footer, .print\\:hidden { display: none !important; }
+}

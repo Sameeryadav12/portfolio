@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
     // Email via Resend (set env vars on Vercel)
     const RESEND_API_KEY = process.env.RESEND_API_KEY
-    const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'you@example.com'
+    const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'ysameer0303@gmail.com'
 
     if (!RESEND_API_KEY) {
       console.warn('Missing RESEND_API_KEY — skipping send but returning ok.')

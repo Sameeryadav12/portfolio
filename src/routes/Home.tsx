@@ -8,7 +8,7 @@ import CountUp from 'react-countup'
 import { testimonials } from '../data/testimonials'
 import GithubRecent from '../components/GithubRecent'
 import SkillGraph from '../components/SkillGraph'
-
+import PinnedRepos from '../components/PinnedRepos'
 
 
 
@@ -260,6 +260,7 @@ export default function Home() {
       </div>
     ))}
   </div>
+  <PinnedRepos />
 </motion.section>
 <GithubRecent />
 <SkillGraph />

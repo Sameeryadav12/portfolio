@@ -1,28 +1,64 @@
-import { useParams, Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import matter from 'gray-matter'
-import ReactMarkdown from 'react-markdown'
+import { readingTime } from '../lib/readingTime'
 
 const modules = import.meta.glob('../posts/*.md', { as: 'raw', eager: true })
 
-export default function BlogPost() {
-  const { slug } = useParams()
-  const path = `../posts/${slug}.md`
-  const raw = (modules as Record<string, string>)[path]
+type Post = { slug: string; title: string; date: string; tags: string[]; content: string }
 
-  if (!raw) {
-    return <div className="text-brand-mist">Post not found.</div>
-  }
+const posts: Post[] = Object.entries(modules).map(([path, raw]) => {
+  const { data, content } = matter(raw as string)
+  const slug = path.split('/').pop()!.replace('.md', '')
+  return { slug, title: data.title ?? slug, date: data.date ?? '', tags: data.tags ?? [], content }
+}).sort((a, b) => (a.date < b.date ? 1 : -1))
 
-  const { data, content } = matter(raw)
+const allTags = Array.from(new Set(posts.flatMap(p => p.tags))).sort()
+
+export default function BlogList() {
+  const [params, setParams] = useSearchParams()
+  const active = params.get('tag') || 'All'
+  const filtered = active === 'All' ? posts : posts.filter(p => p.tags.includes(active))
 
   return (
-    <article className="space-y-3">
-      <Link to="/blog" className="text-brand-mist hover:text-brand-fog">← Back to Notes</Link>
-      <h1 className="text-3xl font-bold text-brand-fog">{data.title}</h1>
-      <div className="text-sm text-brand-mist">{data.date}</div>
-      <div className="prose prose-invert max-w-none">
-        <ReactMarkdown>{content}</ReactMarkdown>
+    <section className="space-y-4">
+      <header className="text-center">
+        <h1 className="text-3xl font-bold text-brand-fog">Notes & Blog</h1>
+        <p className="text-brand-mist">Short write-ups on projects, patterns, and lessons learned.</p>
+      </header>
+
+      {/* Tag filter */}
+      <div className="flex flex-wrap items-center gap-2 justify-center">
+        {['All', ...allTags].map(tag => (
+          <button
+            key={tag}
+            onClick={() => setParams(tag === 'All' ? {} : { tag })}
+            className={`rounded-full border px-4 py-1 text-sm ${
+              active === tag
+                ? 'border-brand-mist/40 bg-brand-teal text-white'
+                : 'border-brand-mist/20 bg-brand-base/50 text-brand-fog hover:bg-brand-base/70'
+            }`}
+          >
+            {tag}
+          </button>
+        ))}
       </div>
-    </article>
+
+      <div className="grid gap-4">
+        {filtered.map(p => {
+          const { mins } = readingTime(p.content)
+          return (
+            <Link key={p.slug} to={`/blog/${p.slug}`} className="rounded-2xl border border-brand-mist/20 bg-brand-slate/40 p-5 hover:bg-brand-slate/60">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-brand-fog">{p.title}</h3>
+                <span className="text-xs text-brand-mist">{p.date} · {mins} min read</span>
+              </div>
+              <div className="mt-2 flex flex-wrap gap-2 text-xs text-brand-mist">
+                {p.tags?.map(t => <span key={t} className="rounded-full border border-brand-mist/20 px-2 py-0.5">{t}</span>)}
+              </div>
+            </Link>
+          )
+        })}
+      </div>
+    </section>
   )
 }

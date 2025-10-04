@@ -6,12 +6,8 @@ const modules = import.meta.glob('../posts/*.md', { as: 'raw', eager: true })
 
 export default function BlogPost() {
   const { slug } = useParams()
-  const path = `../posts/${slug}.md`
-  const raw = (modules as Record<string, string>)[path]
-
-  if (!raw) {
-    return <div className="text-brand-mist">Post not found.</div>
-  }
+  const raw = (modules as Record<string, string>)[`../posts/${slug}.md`]
+  if (!raw) return <div className="text-brand-mist">Post not found.</div>
 
   const { data, content } = matter(raw)
 

@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "rss": "node scripts/generate-rss.mjs",
+    "build": "tsc -b && vite build && npm run rss",
     "lint": "eslint .",
     "preview": "vite preview"
+
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

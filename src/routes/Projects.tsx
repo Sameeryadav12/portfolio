@@ -1,9 +1,12 @@
+// src/pages/Projects.tsx
 import { useMemo, useState } from 'react'
 import { projects } from '../data/projects'
 import { Link } from 'react-router-dom'
-import { Github, ExternalLink, Youtube, Store, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { motion } from 'framer-motion'
 import clsx from 'clsx'
+import { toIconItems } from '../lib/techIcons'
+import TechLogos from '../components/TechLogos'
 
 const ALL = 'All'
 
@@ -18,7 +21,7 @@ export default function Projects() {
     return [ALL, ...Array.from(set)]
   }, [])
 
-  // Basic filter + search
+  // Filter + search
   const filtered = projects.filter(p => {
     const matchesCat = active === ALL || (p.categories ?? []).includes(active)
     const hay = (p.title + ' ' + p.summary + ' ' + p.stack.join(' ')).toLowerCase()
@@ -33,6 +36,7 @@ export default function Projects() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.35 }}
     >
+      {/* Header */}
       <motion.header
         className="space-y-2 text-center"
         initial={{ opacity: 0, y: 16 }}
@@ -41,7 +45,7 @@ export default function Projects() {
       >
         <h1 className="text-3xl font-bold text-brand-fog">Projects</h1>
         <p className="text-brand-mist max-w-2xl mx-auto">
-          Filter by type or search by keywords (tech, title, description).
+          Filter by category or search by keywords (tech, title, description).
         </p>
       </motion.header>
 
@@ -52,9 +56,9 @@ export default function Projects() {
             key={cat}
             onClick={() => setActive(cat)}
             className={clsx(
-              'rounded-full border px-4 py-1 text-sm',
+              'rounded-full border px-4 py-1 text-sm transition-colors',
               active === cat
-                ? 'border-brand-mist/40 bg-brand-teal text-white'
+                ? 'border-brand-mist/40 bg-brand-teal text-white shadow-md'
                 : 'border-brand-mist/20 bg-brand-base/50 text-brand-fog hover:bg-brand-base/70'
             )}
           >
@@ -70,8 +74,10 @@ export default function Projects() {
           <input
             value={q}
             onChange={e => setQ(e.target.value)}
-            placeholder="Search: React, Unity, API, KPI…"
-            className="w-full rounded-2xl border border-brand-mist/20 bg-brand-base/50 pl-9 pr-3 py-2 text-brand-fog placeholder:text-brand-mist focus:outline-none focus:ring-2 focus:ring-brand-teal/40"
+            placeholder="Search: React, Unity, API, SQL…"
+            className="w-full rounded-2xl border border-brand-mist/20 bg-brand-base/60 pl-9 pr-3 py-2 
+                       text-brand-fog placeholder:text-brand-mist 
+                       focus:outline-none focus:ring-2 focus:ring-brand-teal/40"
           />
         </div>
       </div>
@@ -79,17 +85,18 @@ export default function Projects() {
       {/* Results */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filtered.map((p, idx) => {
-          const accent = p.visuals?.accent ?? '#124E66' // brand.teal
+          const accent = p.visuals?.accent ?? '#124E66'
           return (
             <motion.article
               key={p.slug}
-              className="group relative overflow-hidden rounded-3xl border border-brand-mist/20 bg-brand-slate/30 backdrop-blur"
+              className="group relative overflow-hidden rounded-3xl border border-brand-mist/20 
+                         bg-brand-slate/40 backdrop-blur shadow-sm hover:shadow-lg"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: idx * 0.03 }}
+              transition={{ duration: 0.35, delay: idx * 0.04 }}
               whileHover={{ y: -4 }}
             >
-              {/* Thumb */}
+              {/* Thumbnail */}
               <div className="relative h-44 w-full overflow-hidden">
                 {p.visuals?.thumb ? (
                   <img
@@ -101,7 +108,7 @@ export default function Projects() {
                 ) : (
                   <div className="h-full w-full bg-gradient-to-br from-brand-slate to-brand-base" />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/0 to-brand-base/90" />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-base/90" />
               </div>
 
               {/* Body */}
@@ -119,49 +126,20 @@ export default function Projects() {
 
                 <p className="mt-2 text-sm text-brand-mist line-clamp-2">{p.summary}</p>
 
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {p.stack.slice(0, 4).map((t) => (
-                    <span key={t} className="rounded-full bg-brand-base/50 border border-brand-mist/20 px-3 py-1 text-xs text-brand-fog">
-                      {t}
-                    </span>
-                  ))}
-                  {p.stack.length > 4 && (
-                    <span className="rounded-full bg-brand-base/50 border border-brand-mist/20 px-3 py-1 text-xs text-brand-fog">
-                      +{p.stack.length - 4}
-                    </span>
-                  )}
+                {/* Tech logos */}
+                <div className="mt-3">
+                  <TechLogos items={toIconItems(p.stack)} />
                 </div>
 
+                {/* Actions */}
                 <div className="mt-4 flex items-center justify-between">
                   <Link
                     to={`/projects/${p.slug}`}
-                    className="rounded-2xl px-4 py-2 text-sm font-medium text-white"
+                    className="rounded-2xl px-4 py-2 text-sm font-medium text-white transition-colors"
                     style={{ backgroundColor: accent }}
                   >
                     Case Study
                   </Link>
-                  <div className="flex items-center gap-2 text-brand-mist">
-                    {p.links?.repo && (
-                      <a href={p.links.repo} target="_blank" rel="noreferrer" className="hover:text-brand-fog" title="GitHub">
-                        <Github size={18} />
-                      </a>
-                    )}
-                    {p.links?.demo && (
-                      <a href={p.links.demo} target="_blank" rel="noreferrer" className="hover:text-brand-fog" title="Live Demo">
-                        <ExternalLink size={18} />
-                      </a>
-                    )}
-                    {p.links?.youtube && (
-                      <a href={p.links.youtube} target="_blank" rel="noreferrer" className="hover:text-brand-fog" title="YouTube">
-                        <Youtube size={18} />
-                      </a>
-                    )}
-                    {p.links?.store && (
-                      <a href={p.links.store} target="_blank" rel="noreferrer" className="hover:text-brand-fog" title="Store">
-                        <Store size={18} />
-                      </a>
-                    )}
-                  </div>
                 </div>
               </div>
             </motion.article>

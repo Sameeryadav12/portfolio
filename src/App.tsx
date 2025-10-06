@@ -1,5 +1,9 @@
+// src/App.tsx
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
+
+// pages
 import Home from './routes/Home'
 import Projects from './routes/Projects'
 import Project from './routes/Project'
@@ -8,7 +12,7 @@ import Resume from './routes/Resume'
 import Contact from './routes/Contact'
 import BlogList from './routes/BlogList'
 import BlogPost from './routes/BlogPost'
-
+import NotFound from './routes/NotFound'
 
 export default function App() {
   return (
@@ -22,6 +26,8 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<BlogList />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        {/* Catch-all at the bottom */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
   )

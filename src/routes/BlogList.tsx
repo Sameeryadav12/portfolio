@@ -2,7 +2,12 @@ import { Link, useSearchParams } from 'react-router-dom'
 import matter from 'gray-matter'
 import { readingTime } from '../lib/readingTime'
 
-const modules = import.meta.glob('../posts/*.md', { as: 'raw', eager: true })
+let modules: Record<string, string> = {}
+try {
+  modules = import.meta.glob('../posts/*.md', { as: 'raw', eager: true })
+} catch {
+  console.warn('⚠️ No posts directory found, skipping blog import.')
+}
 
 type Post = { slug: string; title: string; date: string; tags: string[]; content: string }
 
@@ -18,6 +23,15 @@ export default function BlogList() {
   const [params, setParams] = useSearchParams()
   const active = params.get('tag') || 'All'
   const filtered = active === 'All' ? posts : posts.filter(p => p.tags.includes(active))
+
+  if (posts.length === 0) {
+    return (
+      <section className="text-center mt-20 text-brand-mist">
+        <h2 className="text-2xl font-bold text-brand-fog">No posts yet 📝</h2>
+        <p>Blog section is under construction. Check back soon!</p>
+      </section>
+    )
+  }
 
   return (
     <section className="space-y-4">

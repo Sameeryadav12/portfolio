@@ -1,20 +1,17 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   darkMode: 'class',
-  content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        brand: {
-          base:  '#212A31', // background
-          slate: '#2E3944', // surfaces
-          teal:  '#124E66', // primary accent
-          mist:  '#748D92', // secondary text / borders
-          fog:   '#D3D9D4', // light text
-        },
+        'brand-base': 'rgb(var(--brand-base) / <alpha-value>)',
+        'brand-slate': 'rgb(var(--brand-slate) / <alpha-value>)',
+        'brand-mist': 'rgb(var(--brand-mist) / <alpha-value>)',
+        'brand-fog': 'rgb(var(--brand-fog) / <alpha-value>)',
+        'brand-teal': 'rgb(var(--brand-teal) / <alpha-value>)',
       },
-      borderRadius: { '3xl': '1.5rem' },
     },
   },
-  plugins: [],
-}
+  plugins: [require('@tailwindcss/typography')],
+};

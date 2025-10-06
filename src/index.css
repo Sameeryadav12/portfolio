@@ -2,20 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Printable A4 sheet */
-.resume-a4 {
-  width: 210mm;
-  min-height: 297mm;
-  margin: 0 auto;
-  box-sizing: border-box;
-  background: #fff;
-  color: #000;
+/* LIGHT THEME (default) */
+:root {
+  --brand-base: 246 249 252;   /* #F6F9FC background */
+  --brand-slate: 237 242 247;  /* #EDF2F7 panels/nav */
+  --brand-fog: 19 29 43;       /* #131D2B text */
+  --brand-mist: 100 116 139;   /* #64748B secondary text */
+  --brand-teal: 26 88 211;     /* #1A58D3 accent */
+
+  /* NEW → neutral chip for icons on light theme */
+  --icon-bg: 255 255 255;      /* white chip */
 }
 
-/* Remove chrome for print */
-@media print {
-  @page { size: A4; margin: 12mm; }
-  body { background: #fff !important; }
-  .resume-a4 { width: auto; min-height: auto; box-shadow: none; }
-  header, nav, footer, .print\\:hidden { display: none !important; }
+/* DARK THEME */
+.dark {
+  --brand-base: 11 18 32;      /* #0b1220 background */
+  --brand-slate: 18 26 45;     /* #121a2d panels/nav */
+  --brand-fog: 232 237 242;    /* #e8edf2 text */
+  --brand-mist: 167 176 192;   /* #a7b0c0 secondary */
+  --brand-teal: 18 78 102;     /* #124E66 accent */
+
+  /* NEW → deeper chip for icons on dark theme */
+  --icon-bg: 24 34 54;         /* deep navy chip */
 }

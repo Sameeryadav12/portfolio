@@ -1,98 +1,123 @@
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+const TO = import.meta.env.VITE_CONTACT_EMAIL || 'ysameer0303@gmail.com'
+
 const schema = z.object({
-  name: z.string().min(2, 'Please enter your name'),
+  name: z.string().min(2, 'Please enter your full name'),
   email: z.string().email('Enter a valid email'),
+  subject: z.string().min(2, 'Subject is required'),
   message: z.string().min(10, 'Message should be at least 10 characters'),
-  // honeypot (not shown)
   honey: z.string().optional(),
 })
 
-type FormData = z.infer<typeof schema>
+type FormValues = z.infer<typeof schema>
 
 export default function Contact() {
+  const [sent, setSent] = useState(false)
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
     reset,
-  } = useForm<FormData>({ resolver: zodResolver(schema) })
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({ resolver: zodResolver(schema) })
 
-  const onSubmit = async (data: FormData) => {
-    // Try serverless first
+  async function onSubmit(data: FormValues) {
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, honey: '' }),
+        body: JSON.stringify(data),
       })
-
       if (res.ok) {
-        alert('Thanks! Your message has been sent.')
+        setSent(true)
         reset()
         return
       }
     } catch {
-      // fall back to mailto below
+      // ignore, fallback next
     }
 
-    // Fallback: mailto (works locally or if serverless is unavailable)
-    const subject = encodeURIComponent(`Portfolio Contact — ${data.name}`)
-    const body = encodeURIComponent(`${data.message}\n\nFrom: ${data.name} <${data.email}>`)
-    window.location.href = `mailto:${''}?subject=${subject}&body=${body}`
-    reset()
+    // fallback (mailto)
+    const subject = encodeURIComponent(data.subject)
+    const body = encodeURIComponent(
+      `Name: ${data.name}\nEmail: ${data.email}\n\n${data.message}`
+    )
+    window.location.href = `mailto:${TO}?subject=${subject}&body=${body}`
   }
 
   return (
-    <section className="max-w-2xl mx-auto rounded-3xl border border-brand-mist/20 bg-brand-slate/40 p-6">
-      <h1 className="text-3xl font-bold text-brand-fog">Contact</h1>
-      <p className="mt-2 text-brand-mist">Feel free to reach out for roles, collaborations, or questions.</p>
+    <section className="max-w-2xl mx-auto p-6">
+      <h1 className="text-3xl font-semibold mb-2 text-brand-fog">Contact</h1>
+      <p className="text-brand-mist mb-6">
+        I usually reply within 24–48 hours. On local dev, this opens your mail app;
+        on Vercel it sends via a secure serverless function.
+      </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4" noValidate>
-        {/* Honeypot (hidden) */}
-        <input type="text" tabIndex={-1} autoComplete="off" className="hidden" {...register('honey')} />
-
-        <div>
-          <label className="block text-sm text-brand-mist mb-1">Name</label>
-          <input
-            className="w-full rounded-xl border border-brand-mist/20 bg-brand-base/50 px-3 py-2 text-brand-fog focus:outline-none focus:ring-2 focus:ring-brand-teal/40"
-            {...register('name')}
-          />
-          {errors.name && <p className="text-xs text-red-300 mt-1">{errors.name.message}</p>}
+      {sent ? (
+        <div className="rounded-xl bg-[#124E66]/20 border border-[#124E66] p-4 text-[#D3D9D4]">
+          ✅ Thanks! Your message was sent successfully.
         </div>
+      ) : (
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {/* Honeypot field */}
+          <input type="text" {...register('honey')} className="hidden" tabIndex={-1} autoComplete="off" />
 
-        <div>
-          <label className="block text-sm text-brand-mist mb-1">Email</label>
-          <input
-            className="w-full rounded-xl border border-brand-mist/20 bg-brand-base/50 px-3 py-2 text-brand-fog focus:outline-none focus:ring-2 focus:ring-brand-teal/40"
-            {...register('email')}
-          />
-          {errors.email && <p className="text-xs text-red-300 mt-1">{errors.email.message}</p>}
-        </div>
+          <div>
+            <label className="block text-sm mb-1 text-brand-mist">Name</label>
+            <input
+              className="w-full rounded-xl bg-[#212A31] text-[#D3D9D4] placeholder-[#748D92] border border-brand-mist/20 focus:outline-none focus:ring-2 focus:ring-[#124E66] px-3 py-2"
+              placeholder="Your name"
+              {...register('name')}
+            />
+            {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name.message}</p>}
+          </div>
 
-        <div>
-          <label className="block text-sm text-brand-mist mb-1">Message</label>
-          <textarea
-            rows={6}
-            className="w-full rounded-xl border border-brand-mist/20 bg-brand-base/50 px-3 py-2 text-brand-fog focus:outline-none focus:ring-2 focus:ring-brand-teal/40"
-            {...register('message')}
-          />
-          {errors.message && <p className="text-xs text-red-300 mt-1">{errors.message.message}</p>}
-        </div>
+          <div>
+            <label className="block text-sm mb-1 text-brand-mist">Email</label>
+            <input
+              className="w-full rounded-xl bg-[#212A31] text-[#D3D9D4] placeholder-[#748D92] border border-brand-mist/20 focus:outline-none focus:ring-2 focus:ring-[#124E66] px-3 py-2"
+              placeholder="you@example.com"
+              {...register('email')}
+            />
+            {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>}
+          </div>
 
-        <div className="pt-2">
+          <div>
+            <label className="block text-sm mb-1 text-brand-mist">Subject</label>
+            <input
+              className="w-full rounded-xl bg-[#212A31] text-[#D3D9D4] placeholder-[#748D92] border border-brand-mist/20 focus:outline-none focus:ring-2 focus:ring-[#124E66] px-3 py-2"
+              placeholder="How can I help?"
+              {...register('subject')}
+            />
+            {errors.subject && <p className="text-red-400 text-sm mt-1">{errors.subject.message}</p>}
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1 text-brand-mist">Message</label>
+            <textarea
+              className="w-full min-h-[160px] rounded-xl bg-[#212A31] text-[#D3D9D4] placeholder-[#748D92] border border-brand-mist/20 focus:outline-none focus:ring-2 focus:ring-[#124E66] px-3 py-2"
+              placeholder="Say hello…"
+              {...register('message')}
+            />
+            {errors.message && <p className="text-red-400 text-sm mt-1">{errors.message.message}</p>}
+          </div>
+
           <button
+            type="submit"
+            className="rounded-xl px-4 py-2 bg-[#124E66] text-[#D3D9D4] hover:bg-[#0f4152] transition disabled:opacity-70"
             disabled={isSubmitting}
-            className="rounded-2xl px-5 py-3 text-white disabled:opacity-60"
-            style={{ backgroundColor: '#124E66' }}
           >
-            Send
+            {isSubmitting ? 'Sending…' : 'Send'}
           </button>
-          {isSubmitSuccessful && <span className="ml-3 text-brand-mist">Thanks! I’ll get back to you shortly.</span>}
-        </div>
-      </form>
+
+          <p className="text-xs text-brand-mist mt-2">
+            Fallback email: <strong>{TO}</strong>
+          </p>
+        </form>
+      )}
     </section>
   )
 }

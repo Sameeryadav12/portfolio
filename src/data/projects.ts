@@ -1,5 +1,3 @@
-// src/data/projects.ts
-
 // ---------- Types (safe to extend; optional fields won't break current pages) ----------
 export type DeepSection = {
   title: string
@@ -41,58 +39,57 @@ export type Project = {
 // ---------- Data ----------
 export const projects: Project[] = [
   {
-  slug: 'call-a-technician',
-  title: 'Call-a-Technician Admin Portal',
-  role: 'Full-Stack Developer',
-  timeline: '2025 – Ongoing',                 // ✅ was "period"
-  stack: ['React', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'TailwindCSS'],
-  categories: ['Web', 'Backend'],
-  summary:
-    'Web admin platform for jobs, invoices, technicians, and scheduling with KPI dashboards and invoice syncing.',
-  highlights: [
-    'Implemented job creation, technician assignment, and automated pricing logic',
-    'Invoice management with job–invoice syncing and consistency checks',
-    'Dashboards and KPI cards for real-time tracking (open/closed/overdue)',
-    'Reduced manual workload by 30%+ via streamlined flows and data integrity',
-    'Team of 5; one of two full-stack engineers (front-end & back-end integration)'
-  ],
-  links: {
-    repo: '',                                  // leave empty until GitHub is ready
-    demo: ''
-  },
-  sections: [
-    {
-      title: 'Key Decisions',
-      items: [
-        'MongoDB for flexible job/invoice schema; indexed queries for KPI cards',
-        'Server-side pagination and validation in Express',
-        'JWT-based auth; print-friendly invoice view for finance'
-      ]
-    },
-    {
-      title: 'What I’d Improve Next',
-      items: [
-        'Roster/columns schedule with conflict warnings',
-        'Recurring jobs + calendar sync (iCal/Google)',
-        'Background worker to pre-aggregate KPIs for large datasets'
-      ]
-    }
-  ],
-  visuals: {                                    // ✅ merged into a single "visuals"
-    thumb: '/images/call-tech/thumb.png',
-    banner: '/images/call-tech/banner.png',     // make sure the file exists
-    gallery: [
-      '/images/call-tech/screen-1.png',
-      '/images/call-tech/screen-2.png'
+    slug: 'call-a-technician',
+    title: 'Call-a-Technician Admin Portal',
+    role: 'Full-Stack Developer',
+    timeline: '2025 – Ongoing',
+    stack: ['React', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'TailwindCSS'],
+    categories: ['Web', 'Backend'],
+    summary:
+      'Web admin platform for jobs, invoices, technicians, and scheduling with KPI dashboards and invoice syncing.',
+    highlights: [
+      'Implemented job creation, technician assignment, and automated pricing logic',
+      'Invoice management with job–invoice syncing and consistency checks',
+      'Dashboards and KPI cards for real-time tracking (open/closed/overdue)',
+      'Reduced manual workload by 30%+ via streamlined flows and data integrity',
+      'Team of 5; one of two full-stack engineers (front-end & back-end integration)'
     ],
-    accent: '#124E66'                           // your teal accent
+    links: {
+      repo: '',
+      demo: ''
+    },
+    sections: [
+      {
+        title: 'Key Decisions',
+        items: [
+          'MongoDB for flexible job/invoice schema; indexed queries for KPI cards',
+          'Server-side pagination and validation in Express',
+          'JWT-based auth; print-friendly invoice view for finance'
+        ]
+      },
+      {
+        title: 'What I’d Improve Next',
+        items: [
+          'Roster/columns schedule with conflict warnings',
+          'Recurring jobs + calendar sync (iCal/Google)',
+          'Background worker to pre-aggregate KPIs for large datasets'
+        ]
+      }
+    ],
+    visuals: {
+      thumb: '/images/call-tech/thumb.png',
+      banner: '/images/call-tech/banner.png',
+      gallery: [
+        '/images/call-tech/screen-1.png',
+        '/images/call-tech/screen-2.png'
+      ],
+      accent: '#124E66'
+    },
+    stats: [
+      { label: 'Manual Work', value: '−30%+' },
+      { label: 'Team Size', value: '5' }
+    ]
   },
-  stats: [
-    { label: 'Manual Work', value: '−30%+' },
-    { label: 'Team Size', value: '5' }
-  ]
-},
-
 
   {
     slug: 'balance-3d',
@@ -212,7 +209,7 @@ export const projects: Project[] = [
       'CI with GitHub Actions (typecheck/test/build) and Vercel deploy previews'
     ],
     links: {
-      repo: '' // ← paste GitHub repo when ready
+      repo: ''
     },
     sections: [
       {

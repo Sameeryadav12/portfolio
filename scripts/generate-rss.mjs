@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
 
-const site = 'https://portfolio-git-main-sameer-yadavs-projects-eccee2d1.vercel.app' // TODO: set your deployed domain
+const site = process.env.SITE_URL || 'https://portfolio-cyan-nine-94.vercel.app/' // TODO: set your deployed domain
 const postsDir = path.resolve('src/posts')
 const outFile = path.resolve('public/rss.xml')
 

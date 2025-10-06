@@ -1,5 +1,1 @@
-export function readingTime(text: string, wpm = 200) {
-  const words = text.trim().split(/\s+/).length
-  const mins = Math.max(1, Math.round(words / wpm))
-  return { words, mins }
-}
+export function readingTime(s: string){const w=(s||'').trim().split(/\s+/).filter(Boolean).length;return{words:w,mins:Math.max(1,Math.round(w/200))}}

@@ -423,23 +423,23 @@ export default function Home() {
             
             <div className="grid md:grid-cols-3 gap-8">
               {featuredProjects.map((project, index) => (
-                <motion.div
-                  key={project.slug}
-                  className="group relative overflow-hidden rounded-3xl shadow-2xl border-2"
-                  style={{ 
-                    backgroundColor: 'var(--theme-surface)',
-                    borderColor: 'var(--theme-border)'
-                  }}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ 
-                    scale: 1.03, 
-                    y: -10,
-                    borderColor: 'var(--theme-primary)',
-                    boxShadow: 'var(--theme-glow)'
-                  }}
-                >
+                <Link key={project.slug} to={`/projects/${project.slug}`}>
+                  <motion.div
+                    className="group relative overflow-hidden rounded-3xl shadow-2xl border-2 cursor-pointer block"
+                    style={{ 
+                      backgroundColor: 'var(--theme-surface)',
+                      borderColor: 'var(--theme-border)'
+                    }}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    whileHover={{ 
+                      scale: 1.03, 
+                      y: -10,
+                      borderColor: 'var(--theme-primary)',
+                      boxShadow: 'var(--theme-glow)'
+                    }}
+                  >
                   {/* Background Pattern */}
                   <div className="absolute inset-0 opacity-5">
                     <div className="absolute inset-0" style={{
@@ -580,7 +580,8 @@ export default function Home() {
                       )}
                     </div>
                   </div>
-                </motion.div>
+                  </motion.div>
+                </Link>
               ))}
             </div>
             

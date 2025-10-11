@@ -16,27 +16,28 @@ const AdvancedProjectCard: React.FC<AdvancedProjectCardProps> = ({ project, inde
   const thumbnail = project.visuals?.thumb || 'https://via.placeholder.com/400x300/1e293b/cbd5e1?text=Project+Image'
 
   return (
-    <motion.article
-      className="group relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer"
-      style={{ 
-        backgroundColor: 'var(--theme-surface)',
-        boxShadow: 'var(--theme-shadow)'
-      }}
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ 
-        duration: 0.6, 
-        delay: index * 0.1,
-        type: "spring",
-        stiffness: 100
-      }}
-      whileHover={{ 
-        scale: 1.03, 
-        y: -10,
-        boxShadow: '0 35px 60px -12px rgba(0, 0, 0, 0.4)',
-        transition: { duration: 0.3 }
-      }}
-    >
+    <Link to={`/projects/${project.slug}`}>
+      <motion.article
+        className="group relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer block"
+        style={{ 
+          backgroundColor: 'var(--theme-surface)',
+          boxShadow: 'var(--theme-shadow)'
+        }}
+        initial={{ opacity: 0, y: 30, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ 
+          duration: 0.6, 
+          delay: index * 0.1,
+          type: "spring",
+          stiffness: 100
+        }}
+        whileHover={{ 
+          scale: 1.03, 
+          y: -10,
+          boxShadow: '0 35px 60px -12px rgba(0, 0, 0, 0.4)',
+          transition: { duration: 0.3 }
+        }}
+      >
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
       
@@ -82,27 +83,19 @@ const AdvancedProjectCard: React.FC<AdvancedProjectCardProps> = ({ project, inde
           </span>
         </div>
         
-        {/* Hover Action Button */}
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileHover={{ opacity: 1, scale: 1 }}
-        >
-          <Link
-            to={`/projects/${project.slug}`}
-            className="inline-flex items-center gap-3 rounded-2xl px-6 py-3 text-white font-semibold shadow-lg backdrop-blur-sm"
+        {/* Hover indicator */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
+          <div className="inline-flex items-center gap-3 rounded-2xl px-6 py-3 text-white font-semibold shadow-lg backdrop-blur-sm"
             style={{ 
               backgroundColor: accent,
               boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)'
             }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
             <Zap size={18} />
             View Case Study
             <ArrowRight size={18} />
-          </Link>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
       {/* Body */}
@@ -183,7 +176,8 @@ const AdvancedProjectCard: React.FC<AdvancedProjectCardProps> = ({ project, inde
           background: `linear-gradient(90deg, ${accent}, transparent)`
         }}
       />
-    </motion.article>
+      </motion.article>
+    </Link>
   )
 }
 

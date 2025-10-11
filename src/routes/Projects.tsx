@@ -96,7 +96,6 @@ export default function Projects() {
           >
             {[
               { icon: Target, value: projects.length, label: 'Total Projects', color: 'text-blue-400' },
-              { icon: Clock, value: '3+', label: 'Years Experience', color: 'text-green-400' },
               { icon: Users, value: '5', label: 'Team Members Led', color: 'text-purple-400' },
               { icon: Award, value: '100%', label: 'Client Satisfaction', color: 'text-yellow-400' }
             ].map((stat, index) => {

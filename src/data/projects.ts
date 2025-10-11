@@ -131,10 +131,10 @@ export const projects: Project[] = [
       }
     ],
     visuals: {
-      thumb: '/dist/images/balance_3d_thumbnail.png',
-      banner: '/dist/images/balance_3d_thumbnail.png',
+      thumb: '/images/balance_3d_thumbnail.png',
+      banner: '/images/balance_3d_thumbnail.png',
       gallery: [
-        '/dist/images/balance_3d_thumbnail.png'
+        '/images/balance_3d_thumbnail.png'
       ],
       accent: '#31EE88'
     },

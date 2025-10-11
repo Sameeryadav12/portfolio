@@ -67,7 +67,17 @@ export default function Project() {
   const accent = visuals?.accent ?? '#124E66'
 
   return (
-    <div className="space-y-12">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--theme-background)' }}>
+      {/* Background Pattern */}
+      <div className="fixed inset-0 opacity-5 pointer-events-none">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, var(--theme-primary) 2px, transparent 2px),
+                           radial-gradient(circle at 75% 75%, var(--theme-primary) 2px, transparent 2px)`,
+          backgroundSize: '40px 40px'
+        }} />
+      </div>
+      
+      <div className="relative space-y-12 z-10">
       {/* Top back link */}
       <ScrollAnimation direction="up" delay={0.2}>
         <motion.div 
@@ -94,8 +104,11 @@ export default function Project() {
       {/* HERO with banner */}
       <ScrollAnimation direction="up" delay={0.4}>
         <motion.section
-          className="relative overflow-hidden rounded-3xl shadow-2xl"
-          style={{ backgroundColor: 'var(--theme-surface)' }}
+          className="relative overflow-hidden rounded-3xl shadow-2xl border"
+          style={{ 
+            backgroundColor: 'var(--theme-surface)',
+            borderColor: 'var(--theme-border)'
+          }}
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
@@ -149,10 +162,11 @@ export default function Project() {
 
           <div className="relative -mt-16 px-8 pb-8">
             <div 
-              className="rounded-3xl p-8 backdrop-blur-sm shadow-2xl"
+              className="rounded-3xl p-8 backdrop-blur-sm shadow-2xl border"
               style={{ 
                 backgroundColor: 'var(--theme-surface)',
-                border: '1px solid var(--theme-border)'
+                borderColor: 'var(--theme-border)',
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05)'
               }}
             >
               <div className="flex items-start justify-between mb-6">
@@ -305,20 +319,33 @@ export default function Project() {
               <Zap size={24} style={{ color: 'var(--theme-primary)' }} />
               <h2 className="text-2xl font-bold" style={{ color: 'var(--theme-text)' }}>Key Highlights</h2>
             </div>
-            <ul className="space-y-4">
+            <ul className="space-y-6">
               {highlights.map((h, i) => (
                 <motion.li 
                   key={i}
-                  className="flex items-start gap-3"
+                  className="group flex items-start gap-4 p-4 rounded-2xl transition-all duration-300 hover:shadow-lg"
+                  style={{ 
+                    backgroundColor: 'var(--theme-background)',
+                    border: '1px solid var(--theme-border)'
+                  }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
+                  whileHover={{ scale: 1.02, x: 5 }}
                 >
                   <div 
-                    className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
-                    style={{ backgroundColor: accent }}
+                    className="w-3 h-3 rounded-full mt-1 flex-shrink-0 shadow-lg"
+                    style={{ 
+                      backgroundColor: accent,
+                      boxShadow: `0 0 10px ${accent}40`
+                    }}
                   />
-                  <span style={{ color: 'var(--theme-textSecondary)' }}>{h}</span>
+                  <span 
+                    className="text-base leading-relaxed group-hover:text-white transition-colors duration-300"
+                    style={{ color: 'var(--theme-textSecondary)' }}
+                  >
+                    {h}
+                  </span>
                 </motion.li>
               ))}
             </ul>
@@ -326,10 +353,11 @@ export default function Project() {
 
           <aside className="space-y-6">
             <div 
-              className="rounded-3xl p-6 shadow-lg"
+              className="rounded-3xl p-6 shadow-lg border"
               style={{ 
                 backgroundColor: 'var(--theme-surface)',
-                border: '1px solid var(--theme-border)'
+                borderColor: 'var(--theme-border)',
+                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05)'
               }}
             >
               <div className="flex items-center gap-3 mb-4">
@@ -412,6 +440,7 @@ export default function Project() {
           </Link>
         </motion.div>
       </ScrollAnimation>
+      </div>
     </div>
   )
 }

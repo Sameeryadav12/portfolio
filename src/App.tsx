@@ -3,6 +3,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import ThemeProvider from './theme/ThemeProvider'
+import ScrollToTop from './components/ScrollToTop'
 
 // pages
 import Home from './routes/Home'
@@ -19,6 +20,7 @@ import NotFound from './routes/NotFound'
 export default function App() {
   return (
     <ThemeProvider>
+      <ScrollToTop />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />

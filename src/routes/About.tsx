@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { ChevronDown, ChevronUp, Code, Gamepad2, Users, Award, Coffee, Heart, Sparkles, Target, Zap, Star } from 'lucide-react'
 import ScrollAnimation from '../components/ScrollAnimation'
+import ParticleBackground from '../components/ParticleBackground'
 
 export default function About() {
   const [activeTab, setActiveTab] = useState('story')
@@ -80,7 +81,9 @@ export default function About() {
   ]
 
   return (
-    <div className="space-y-16">
+    <div className="relative min-h-screen">
+      <ParticleBackground />
+      <div className="relative z-10 space-y-16">
       {/* Enhanced Hero Section */}
       <ScrollAnimation direction="up" delay={0.2}>
         <div className="text-center space-y-8">
@@ -598,6 +601,7 @@ export default function About() {
           </div>
         </motion.div>
       </ScrollAnimation>
+      </div>
     </div>
   )
 }

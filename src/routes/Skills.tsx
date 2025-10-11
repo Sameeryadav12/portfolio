@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Code, Database, Gamepad2, Palette, Server, Smartphone, Globe, Zap, Award, TrendingUp, Star, Target, Clock, Users, Sparkles, ArrowRight } from 'lucide-react'
 import ScrollAnimation from '../components/ScrollAnimation'
+import ParticleBackground from '../components/ParticleBackground'
 
 export default function Skills() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
@@ -102,7 +103,9 @@ export default function Skills() {
   ]
 
   return (
-    <div className="space-y-20">
+    <div className="relative min-h-screen">
+      <ParticleBackground />
+      <div className="relative z-10 space-y-20">
       {/* Enhanced Hero Section */}
       <ScrollAnimation direction="up" delay={0.2}>
         <div className="text-center space-y-8">
@@ -429,6 +432,7 @@ export default function Skills() {
           </div>
         </motion.section>
       </ScrollAnimation>
+      </div>
     </div>
   )
 }

@@ -7,6 +7,7 @@ import TechLogos from '../components/TechLogos'
 import AdvancedProjectCard from '../components/AdvancedProjectCard'
 import { Search, Filter, Grid, List, ArrowRight, Star, Zap, Award, Sparkles, Target, Clock, Users } from 'lucide-react'
 import ScrollAnimation from '../components/ScrollAnimation'
+import ParticleBackground from '../components/ParticleBackground'
 
 export default function Projects() {
   const [filter, setFilter] = useState('all')
@@ -46,7 +47,9 @@ export default function Projects() {
   const featuredProject = projects[0] // First project as featured
 
   return (
-    <div className="space-y-20">
+    <div className="relative min-h-screen">
+      <ParticleBackground />
+      <div className="relative z-10 space-y-20">
       {/* Enhanced Hero Section */}
       <ScrollAnimation direction="up" delay={0.2}>
         <div className="text-center space-y-8">
@@ -500,6 +503,7 @@ export default function Projects() {
           </div>
         </motion.div>
       </ScrollAnimation>
+      </div>
     </div>
   )
 }

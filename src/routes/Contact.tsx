@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react'
 import ScrollAnimation from '../components/ScrollAnimation'
+import ParticleBackground from '../components/ParticleBackground'
 
 const TO = import.meta.env.VITE_CONTACT_EMAIL || 'ysameer0303@gmail.com'
 
@@ -90,7 +91,9 @@ export default function Contact() {
   ]
 
   return (
-    <div className="space-y-16">
+    <div className="relative min-h-screen">
+      <ParticleBackground />
+      <div className="relative z-10 space-y-16">
       {/* Hero Section */}
       <ScrollAnimation direction="up" delay={0.2}>
         <div className="text-center space-y-6">
@@ -343,6 +346,7 @@ export default function Contact() {
             )}
           </div>
         </ScrollAnimation>
+      </div>
       </div>
     </div>
   )

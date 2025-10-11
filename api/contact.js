@@ -1,9 +1,19 @@
 // api/contact.js
-import { Resend } from 'resend'
+const { Resend } = require('resend')
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export default async function handler(req, res) {
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end()
+  }
+
   // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' })
@@ -12,25 +22,38 @@ export default async function handler(req, res) {
   try {
     const { name, email, subject, message, honey } = req.body
 
+    console.log('Received contact form data:', { name, email, subject, message: message?.substring(0, 50) + '...' })
+
     // Check for honeypot spam
     if (honey) {
+      console.log('Spam detected - honeypot filled')
       return res.status(400).json({ message: 'Spam detected' })
     }
 
     // Validate required fields
     if (!name || !email || !subject || !message) {
+      console.log('Missing required fields:', { name: !!name, email: !!email, subject: !!subject, message: !!message })
       return res.status(400).json({ message: 'All fields are required' })
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
+      console.log('Invalid email format:', email)
       return res.status(400).json({ message: 'Invalid email format' })
     }
 
+    // Check if API key is available
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set')
+      return res.status(500).json({ message: 'Email service not configured' })
+    }
+
+    console.log('Sending email via Resend...')
+
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>', // Replace with your verified domain
+      from: 'Portfolio Contact <onboarding@resend.dev>',
       to: ['ysameer0303@gmail.com'],
       subject: `Portfolio Contact: ${subject}`,
       html: `
@@ -62,7 +85,7 @@ export default async function handler(req, res) {
 
     if (error) {
       console.error('Resend error:', error)
-      return res.status(500).json({ message: 'Failed to send email' })
+      return res.status(500).json({ message: 'Failed to send email: ' + error.message })
     }
 
     console.log('Email sent successfully:', data)
@@ -70,6 +93,6 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Contact form error:', error)
-    return res.status(500).json({ message: 'Internal server error' })
+    return res.status(500).json({ message: 'Internal server error: ' + error.message })
   }
 }

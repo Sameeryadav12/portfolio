@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Download, Eye, FileText, CheckCircle } from 'lucide-react'
+import ParticleBackground from '../components/ParticleBackground'
 
 export default function Resume() {
   const [isLoading, setIsLoading] = useState(false)
@@ -24,9 +25,11 @@ export default function Resume() {
   }
 
   return (
-    <motion.div 
-      className="space-y-8"
-      initial={{ opacity: 0, y: 20 }}
+    <div className="relative min-h-screen">
+      <ParticleBackground />
+      <motion.div 
+        className="relative z-10 space-y-8"
+        initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
@@ -213,5 +216,6 @@ export default function Resume() {
         </div>
       </motion.div>
     </motion.div>
+    </div>
   )
 }

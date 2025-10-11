@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import ScrollAnimation from '../components/ScrollAnimation'
 import { toIconItems } from '../lib/techIcons'
 import TechLogos from '../components/TechLogos'
+import ParticleBackground from '../components/ParticleBackground'
 
 function Pill({ children }: { children: React.ReactNode }) {
   return (
@@ -68,6 +69,7 @@ export default function Project() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--theme-background)' }}>
+      <ParticleBackground />
       {/* Background Pattern */}
       <div className="fixed inset-0 opacity-5 pointer-events-none">
         <div className="absolute inset-0" style={{

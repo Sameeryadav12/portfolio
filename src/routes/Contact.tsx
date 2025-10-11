@@ -54,12 +54,12 @@ export default function Contact() {
         return
       } else {
         const errorData = await res.json()
-        setSubmitError(errorData.message || 'Sorry, there was an error sending your message. Please try again or contact me directly at ysameer0303@gmail.com')
+        setSubmitError(errorData.message || 'Sorry, there was an error sending your message. Please try again or contact me directly at rishisameer7@gmail.com')
         return
       }
     } catch (error) {
       console.error('Contact form error:', error)
-      setSubmitError('Sorry, there was an error sending your message. Please try again or contact me directly at ysameer0303@gmail.com')
+        setSubmitError('Sorry, there was an error sending your message. Please try again or contact me directly at rishisameer7@gmail.com')
     } finally {
       setIsSubmitting(false)
     }
@@ -69,8 +69,8 @@ export default function Contact() {
     {
       icon: Mail,
       title: 'Email',
-      value: 'ysameer0303@gmail.com',
-      href: 'mailto:ysameer0303@gmail.com?subject=Portfolio Contact&body=Hi Sameer,%0D%0A%0D%0AI found your portfolio and would like to connect.%0D%0A%0D%0ABest regards,',
+      value: 'rishisameer7@gmail.com',
+      href: 'mailto:rishisameer7@gmail.com?subject=Portfolio Contact&body=Hi Sameer,%0D%0A%0D%0AI found your portfolio and would like to connect.%0D%0A%0D%0ABest regards,',
       description: 'I usually reply within 24-48 hours'
     },
     {

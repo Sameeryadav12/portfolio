@@ -105,7 +105,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {[
               { href: 'https://github.com/Sameeryadav12', label: 'GitHub', target: '_blank', rel: 'noreferrer' },
               { href: 'https://www.linkedin.com/in/sameer-yadav-5502a4203/', label: 'LinkedIn', target: '_blank', rel: 'noreferrer' },
-              { href: 'mailto:ysameer0303@gmail.com?subject=Portfolio Contact&body=Hi Sameer,%0D%0A%0D%0AI found your portfolio and would like to connect.%0D%0A%0D%0ABest regards,', label: 'Email', target: '_self', rel: '' }
+              { href: 'mailto:rishisameer7@gmail.com?subject=Portfolio Contact&body=Hi Sameer,%0D%0A%0D%0AI found your portfolio and would like to connect.%0D%0A%0D%0ABest regards,', label: 'Email', target: '_self', rel: '' }
             ].map((link, index) => (
               <motion.a
                 key={link.label}

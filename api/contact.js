@@ -54,7 +54,7 @@ export default async function handler(req, res) {
     // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>',
-      to: ['ysameer0303@gmail.com'],
+      to: ['rishisameer7@gmail.com'],
       subject: `Portfolio Contact: ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

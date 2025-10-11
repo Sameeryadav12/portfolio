@@ -566,7 +566,7 @@ export default function About() {
               
               <div className="flex flex-wrap gap-6 justify-center">
                 <motion.a
-                  href="mailto:ysameer0303@gmail.com?subject=Let's Work Together&body=Hi Sameer,%0D%0A%0D%0AI'd love to discuss potential opportunities with you.%0D%0A%0D%0ABest regards,"
+                  href="mailto:rishisameer7@gmail.com?subject=Let's Work Together&body=Hi Sameer,%0D%0A%0D%0AI'd love to discuss potential opportunities with you.%0D%0A%0D%0ABest regards,"
                   className="group inline-flex items-center gap-3 px-10 py-5 rounded-2xl text-white font-semibold text-lg shadow-2xl relative overflow-hidden"
                   style={{ background: 'var(--theme-gradient-primary)' }}
                   whileHover={{ scale: 1.05, y: -2 }}

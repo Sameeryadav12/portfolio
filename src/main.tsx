@@ -43,3 +43,4 @@ createRoot(rootEl).render(
 
 // mark mounted on the next animation frame to ensure paint happened
 requestAnimationFrame(clearBoot)
+

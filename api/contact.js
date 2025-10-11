@@ -1,77 +1,75 @@
-// /api/contact.js
+// api/contact.js
+import { Resend } from 'resend'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
+
 export default async function handler(req, res) {
+  // Only allow POST requests
   if (req.method !== 'POST') {
-    return res.status(405).json({ ok: false, error: 'Method not allowed' })
+    return res.status(405).json({ message: 'Method not allowed' })
   }
 
   try {
-    const { name, email, subject, message, honey } = req.body || {}
+    const { name, email, subject, message, honey } = req.body
 
-    // Honeypot field: if filled, assume spam and silently succeed
-    if (honey) return res.status(200).json({ ok: true })
+    // Check for honeypot spam
+    if (honey) {
+      return res.status(400).json({ message: 'Spam detected' })
+    }
 
+    // Validate required fields
     if (!name || !email || !subject || !message) {
-      return res.status(400).json({ ok: false, error: 'Missing fields' })
+      return res.status(400).json({ message: 'All fields are required' })
     }
 
-    const RESEND_API_KEY = process.env.RESEND_API_KEY
-    const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'ysameer0303@gmail.com'
-
-    if (!RESEND_API_KEY) {
-      console.warn('⚠️ Missing RESEND_API_KEY — returning ok (no email sent).')
-      return res.status(200).json({ ok: true })
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: 'Invalid email format' })
     }
 
-    const html = `
-      <table cellpadding="0" cellspacing="0" style="font-family: Inter,Roboto,Segoe UI,Helvetica,Arial,sans-serif; max-width:620px; width:100%; margin:0 auto; background:#0b1220; color:#e8edf2; border:1px solid #2E3944; border-radius:12px; overflow:hidden">
-        <tr><td style="padding:18px 22px; background:#124E66; color:#D3D9D4; font-size:18px; font-weight:600">
-          Portfolio message from ${name}
-        </td></tr>
-        <tr><td style="padding:18px 22px">
-          <p><b>From:</b> ${name} &lt;${email}&gt;</p>
-          <p><b>Subject:</b> ${subject}</p>
-          <hr style="border:0; border-top:1px solid #2E3944; margin:14px 0" />
-          <div style="white-space:pre-wrap; line-height:1.6">${escapeHtml(message)}</div>
-        </td></tr>
-        <tr><td style="padding:12px 22px; font-size:12px; color:#748D92">
-          Sent automatically from Sameer Yadav’s portfolio contact form.
-        </td></tr>
-      </table>
-    `
-
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'Portfolio <onboarding@resend.dev>',
-        to: [CONTACT_TO_EMAIL],
-        reply_to: email,
-        subject: `[Portfolio] ${subject}`,
-        html,
-      }),
+    // Send email using Resend
+    const { data, error } = await resend.emails.send({
+      from: 'Portfolio Contact <onboarding@resend.dev>', // Replace with your verified domain
+      to: ['ysameer0303@gmail.com'],
+      subject: `Portfolio Contact: ${subject}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #0ea5e9; border-bottom: 2px solid #0ea5e9; padding-bottom: 10px;">
+            New Contact Form Submission
+          </h2>
+          
+          <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="color: #1e293b; margin-top: 0;">Contact Details</h3>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Subject:</strong> ${subject}</p>
+          </div>
+          
+          <div style="background: #ffffff; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
+            <h3 style="color: #1e293b; margin-top: 0;">Message</h3>
+            <p style="white-space: pre-wrap; line-height: 1.6;">${message}</p>
+          </div>
+          
+          <div style="margin-top: 20px; padding: 15px; background: #f1f5f9; border-radius: 8px; font-size: 14px; color: #64748b;">
+            <p style="margin: 0;">This message was sent from your portfolio contact form.</p>
+            <p style="margin: 5px 0 0 0;">Reply directly to this email to respond to ${name}.</p>
+          </div>
+        </div>
+      `,
+      replyTo: email,
     })
 
-    if (!r.ok) {
-      const txt = await r.text().catch(() => '')
-      console.warn('Resend API error:', r.status, txt)
+    if (error) {
+      console.error('Resend error:', error)
+      return res.status(500).json({ message: 'Failed to send email' })
     }
 
-    return res.status(200).json({ ok: true })
-  } catch (err) {
-    console.error('Contact function error:', err)
-    return res.status(200).json({ ok: true })
-  }
-}
+    console.log('Email sent successfully:', data)
+    return res.status(200).json({ message: 'Email sent successfully' })
 
-// helper: escape HTML
-function escapeHtml(str = '') {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;')
+  } catch (error) {
+    console.error('Contact form error:', error)
+    return res.status(500).json({ message: 'Internal server error' })
+  }
 }

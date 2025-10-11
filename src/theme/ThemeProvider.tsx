@@ -1,50 +1,56 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { themes, Theme, defaultTheme } from './themes';
 
-type Theme = 'light' | 'dark';
-type Ctx = { theme: Theme; toggle: () => void; set: (t: Theme) => void };
+type ThemeName = keyof typeof themes;
+type ThemeContextType = {
+  currentThemeName: ThemeName;
+  setTheme: (name: ThemeName) => void;
+  currentTheme: Theme;
+  themeNames: ThemeName[];
+};
 
-const ThemeCtx = createContext<Ctx | null>(null);
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const getInitialTheme = (): Theme => {
-  const saved = localStorage.getItem('theme');
-  if (saved === 'light' || saved === 'dark') return saved;
-  // fallback to system
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+const getInitialTheme = (): ThemeName => {
+  const saved = localStorage.getItem('themeName');
+  if (saved && themes[saved as ThemeName]) {
+    return saved as ThemeName;
+  }
+  // Fallback to system preference or default
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  return prefersDark ? 'ocean-professional' : 'ocean-professional'; // Default to ocean-professional for both
 };
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [currentThemeName, setCurrentThemeName] = useState<ThemeName>(getInitialTheme);
 
-  // Apply/remove the html class + persist
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'dark') root.classList.add('dark');
-    else root.classList.remove('dark');
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+    const theme = themes[currentThemeName];
 
-  // Update if system preference changes and user hasn’t set one yet
-  useEffect(() => {
-    const mql = window.matchMedia('(prefers-color-scheme: dark)');
-    const handler = () => {
-      const saved = localStorage.getItem('theme');
-      if (!saved) setTheme(mql.matches ? 'dark' : 'light');
-    };
-    mql.addEventListener('change', handler);
-    return () => mql.removeEventListener('change', handler);
-  }, []);
+    // Apply CSS variables
+    for (const [key, value] of Object.entries(theme)) {
+      if (key !== 'name') { // 'name' is not a CSS variable
+        root.style.setProperty(`--theme-${key}`, value);
+      }
+    }
+    localStorage.setItem('themeName', currentThemeName);
+  }, [currentThemeName]);
 
-  const value = useMemo<Ctx>(() => ({
-    theme,
-    toggle: () => setTheme(t => (t === 'dark' ? 'light' : 'dark')),
-    set: setTheme,
-  }), [theme]);
+  const value = useMemo<ThemeContextType>(() => ({
+    currentThemeName,
+    setTheme: setCurrentThemeName,
+    currentTheme: themes[currentThemeName],
+    themeNames: Object.keys(themes) as ThemeName[],
+  }), [currentThemeName]);
 
-  return <ThemeCtx.Provider value={value}>{children}</ThemeCtx.Provider>;
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
 export const useTheme = () => {
-  const ctx = useContext(ThemeCtx);
-  if (!ctx) throw new Error('useTheme must be used inside ThemeProvider');
-  return ctx;
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
 };

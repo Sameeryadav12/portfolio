@@ -52,10 +52,11 @@ export const projects: Project[] = [
       'Invoice management with job–invoice syncing and consistency checks',
       'Dashboards and KPI cards for real-time tracking (open/closed/overdue)',
       'Reduced manual workload by 30%+ via streamlined flows and data integrity',
-      'Team of 5; one of two full-stack engineers (front-end & back-end integration)'
+      'Led full-stack development for admin and technician portals (backend, frontend, database)',
+      'Team of 5: Priyanshu (Scrum Master), Vin (Company Website), Vijaya (Testing/Docs), Quinh (Frontend), Sameer (Full-Stack Admin/Technician Portals)'
     ],
     links: {
-      repo: '',
+      repo: 'https://github.com/Sameeryadav12/portfolio',
       demo: ''
     },
     sections: [
@@ -77,11 +78,10 @@ export const projects: Project[] = [
       }
     ],
     visuals: {
-      thumb: '/images/call-tech/thumb.png',
-      banner: '/images/call-tech/banner.png',
+      thumb: '/images/call-tech-icon.svg',
+      banner: '/images/call-tech-icon.svg',
       gallery: [
-        '/images/call-tech/screen-1.png',
-        '/images/call-tech/screen-2.png'
+        '/images/call-tech-icon.svg'
       ],
       accent: '#124E66'
     },
@@ -110,7 +110,8 @@ export const projects: Project[] = [
     links: {
       repo: '',
       store: '',
-      youtube: 'https://www.youtube.com/watch?v=D_uVdsMsjbI'
+      youtube: 'https://www.youtube.com/watch?v=D_uVdsMsjbI',
+      demo: 'https://www.youtube.com/watch?v=D_uVdsMsjbI'
     },
     sections: [
       {
@@ -130,12 +131,10 @@ export const projects: Project[] = [
       }
     ],
     visuals: {
-      thumb: '/images/balance3d/thumb.jpg',
-      banner: '/images/balance3d/banner.jpg',
+      thumb: '/dist/images/balance_3d_thumbnail.png',
+      banner: '/dist/images/balance_3d_thumbnail.png',
       gallery: [
-        '/images/balance3d/level-1.jpg',
-        '/images/balance3d/level-4.jpg',
-        '/images/balance3d/level-8.jpg'
+        '/dist/images/balance_3d_thumbnail.png'
       ],
       accent: '#31EE88'
     },
@@ -162,7 +161,7 @@ export const projects: Project[] = [
     ],
     links: {
       repo: '',
-      demo: '',
+      demo: 'https://www.youtube.com/watch?v=9dDQtavNqco',
       youtube: 'https://www.youtube.com/watch?v=9dDQtavNqco'
     },
     sections: [
@@ -181,12 +180,17 @@ export const projects: Project[] = [
         ]
       }
     ],
-    visuals: {
-      thumb: '/images/space/thumb.jpg',
-      banner: '/images/space/banner.jpg',
-      gallery: ['/images/space/earth.jpg', '/images/space/jupiter.jpg', '/images/space/menu.jpg'],
-      accent: '#52D5FF'
-    },
+  visuals: {
+    thumb: '/images/atl-space/Screenshot 2025-10-11 113157.png',
+    banner: '/images/atl-space/Screenshot 2025-10-11 113321.png',
+    gallery: [
+      '/images/atl-space/Screenshot 2025-10-11 113157.png',
+      '/images/atl-space/Screenshot 2025-10-11 113321.png',
+      '/images/atl-space/Screenshot 2025-10-11 113357.png',
+      '/images/atl-space/Screenshot 2025-10-11 113426.png'
+    ],
+    accent: '#52D5FF'
+  },
     stats: [
       { label: 'Bodies', value: '20+' },
       { label: 'Mode', value: 'Free-fly + Click-focus' }
@@ -209,7 +213,8 @@ export const projects: Project[] = [
       'CI with GitHub Actions (typecheck/test/build) and Vercel deploy previews'
     ],
     links: {
-      repo: ''
+      repo: 'https://github.com/Sameeryadav12/portfolio',
+      demo: ''
     },
     sections: [
       {
@@ -222,9 +227,11 @@ export const projects: Project[] = [
       }
     ],
     visuals: {
-      thumb: '/images/portfolio/thumb.png',
-      banner: '/images/portfolio/banner.png',
-      gallery: ['/images/portfolio/hero.png', '/images/portfolio/projects.png'],
+      thumb: '/images/portfolio-icon.svg',
+      banner: '/images/portfolio-icon.svg',
+      gallery: [
+        '/images/portfolio-icon.svg'
+      ],
       accent: '#8B5CF6'
     }
   }

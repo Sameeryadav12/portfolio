@@ -1,0 +1,95 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#124E66;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0A3A4A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A5A73;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0F4559;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#52D5FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#31EE88;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bgGradient)"/>
+  
+  <!-- Dashboard/Admin Panel Background -->
+  <rect x="20" y="40" width="360" height="220" rx="15" fill="url(#cardGradient)" stroke="#52D5FF" stroke-width="2"/>
+  
+  <!-- Header Bar -->
+  <rect x="20" y="40" width="360" height="50" rx="15" fill="#0A3A4A"/>
+  <rect x="20" y="50" width="360" height="40" rx="0" fill="#1A5A73"/>
+  
+  <!-- Header Elements -->
+  <!-- Logo/Icon -->
+  <circle cx="50" cy="70" r="12" fill="url(#iconGradient)"/>
+  <path d="M45 70 L50 65 L55 70 L50 75 Z" fill="white"/>
+  
+  <!-- Title -->
+  <text x="75" y="75" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">Call-a-Technician Admin</text>
+  
+  <!-- Status Indicator -->
+  <circle cx="350" cy="70" r="6" fill="#31EE88"/>
+  <text x="365" y="75" font-family="Arial, sans-serif" font-size="12" fill="white">Online</text>
+  
+  <!-- Dashboard Content -->
+  <!-- Left Panel - Jobs List -->
+  <rect x="30" y="100" width="160" height="140" rx="8" fill="#0F4559" stroke="#52D5FF" stroke-width="1"/>
+  <text x="40" y="120" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#52D5FF">Active Jobs</text>
+  
+  <!-- Job Items -->
+  <rect x="40" y="130" width="140" height="25" rx="4" fill="#1A5A73"/>
+  <circle cx="50" cy="142" r="3" fill="#31EE88"/>
+  <text x="60" y="147" font-family="Arial, sans-serif" font-size="11" fill="white">Job #001 - HVAC Repair</text>
+  
+  <rect x="40" y="160" width="140" height="25" rx="4" fill="#1A5A73"/>
+  <circle cx="50" cy="172" r="3" fill="#FFA500"/>
+  <text x="60" y="177" font-family="Arial, sans-serif" font-size="11" fill="white">Job #002 - Plumbing</text>
+  
+  <rect x="40" y="190" width="140" height="25" rx="4" fill="#1A5A73"/>
+  <circle cx="50" cy="202" r="3" fill="#FF6B6B"/>
+  <text x="60" y="207" font-family="Arial, sans-serif" font-size="11" fill="white">Job #003 - Electrical</text>
+  
+  <!-- Right Panel - Analytics -->
+  <rect x="210" y="100" width="160" height="140" rx="8" fill="#0F4559" stroke="#52D5FF" stroke-width="1"/>
+  <text x="220" y="120" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#52D5FF">Analytics</text>
+  
+  <!-- Chart Area -->
+  <rect x="220" y="130" width="140" height="80" rx="4" fill="#1A5A73"/>
+  
+  <!-- Simple Bar Chart -->
+  <rect x="230" y="180" width="15" height="20" fill="#31EE88"/>
+  <rect x="250" y="170" width="15" height="30" fill="#52D5FF"/>
+  <rect x="270" y="160" width="15" height="40" fill="#FFA500"/>
+  <rect x="290" y="175" width="15" height="25" fill="#FF6B6B"/>
+  <rect x="310" y="165" width="15" height="35" fill="#31EE88"/>
+  
+  <!-- Chart Labels -->
+  <text x="225" y="220" font-family="Arial, sans-serif" font-size="10" fill="white">Monthly Jobs</text>
+  
+  <!-- Bottom Stats -->
+  <rect x="30" y="250" width="340" height="30" rx="5" fill="#0A3A4A"/>
+  <text x="40" y="270" font-family="Arial, sans-serif" font-size="12" fill="#52D5FF">Total Jobs: 47</text>
+  <text x="150" y="270" font-family="Arial, sans-serif" font-size="12" fill="#31EE88">Completed: 42</text>
+  <text x="250" y="270" font-family="Arial, sans-serif" font-size="12" fill="#FFA500">Pending: 5</text>
+  
+  <!-- Decorative Elements -->
+  <!-- Corner Accents -->
+  <circle cx="30" cy="30" r="3" fill="#52D5FF" opacity="0.6"/>
+  <circle cx="370" cy="30" r="3" fill="#31EE88" opacity="0.6"/>
+  <circle cx="30" cy="270" r="3" fill="#31EE88" opacity="0.6"/>
+  <circle cx="370" cy="270" r="3" fill="#52D5FF" opacity="0.6"/>
+  
+  <!-- Subtle Pattern Overlay -->
+  <defs>
+    <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="1" fill="#52D5FF" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect x="0" y="0" width="400" height="300" fill="url(#dots)"/>
+</svg>

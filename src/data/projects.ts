@@ -78,12 +78,12 @@ export const projects: Project[] = [
       }
     ],
     visuals: {
-      thumb: 'https://via.placeholder.com/400x300/124E66/ffffff?text=Call-a-Technician',
-      banner: 'https://via.placeholder.com/800x400/124E66/ffffff?text=Call-a-Technician+Admin+Portal',
+      thumb: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMTI0RTY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IndoaXRlIiByeD0iMTAiLz4KPHRleHQgeD0iMjAwIiB5PSIxNDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzEyNEU2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q2FsbC1hLVRlY2huaWNpYW48L3RleHQ+Cjx0ZXh0IHg9IjIwMCIgeT0iMTgwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiMxMjRFNjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkFkbWluIFBvcnRhbDwvdGV4dD4KPC9zdmc+',
+      banner: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMTI0RTY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjcwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IndoaXRlIiByeD0iMTUiLz4KPHRleHQgeD0iNDAwIiB5PSIyMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0OCIgZmlsbD0iIzEyNEU2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q2FsbC1hLVRlY2huaWNpYW48L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iMjUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiMxMjRFNjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkFkbWluIFBvcnRhbDwvdGV4dD4KPC9zdmc+',
       gallery: [
-        'https://via.placeholder.com/800x600/124E66/ffffff?text=Admin+Dashboard',
-        'https://via.placeholder.com/800x600/124E66/ffffff?text=Job+Management',
-        'https://via.placeholder.com/800x600/124E66/ffffff?text=Invoice+System'
+        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDgwMCA2MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMTI0RTY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjcwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9IndoaXRlIiByeD0iMTUiLz4KPHRleHQgeD0iNDAwIiB5PSIzMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0OCIgZmlsbD0iIzEyNEU2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QWRtaW4gRGFzaGJvYXJkPC90ZXh0Pgo8L3N2Zz4=',
+        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDgwMCA2MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMTI0RTY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjcwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9IndoaXRlIiByeD0iMTUiLz4KPHRleHQgeD0iNDAwIiB5PSIzMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0OCIgZmlsbD0iIzEyNEU2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Sm9iIE1hbmFnZW1lbnQ8L3RleHQ+Cjwvc3ZnPg==',
+        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDgwMCA2MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMTI0RTY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjcwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9IndoaXRlIiByeD0iMTUiLz4KPHRleHQgeD0iNDAwIiB5PSIzMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0OCIgZmlsbD0iIzEyNEU2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW52b2ljZSBTeXN0ZW08L3RleHQ+Cjwvc3ZnPg=='
       ],
       accent: '#124E66'
     },
@@ -197,46 +197,5 @@ export const projects: Project[] = [
       { label: 'Bodies', value: '20+' },
       { label: 'Mode', value: 'Free-fly + Click-focus' }
     ]
-  },
-
-  {
-    slug: 'portfolio-website',
-    title: 'Personal Portfolio Website',
-    role: 'Full-Stack Frontend Developer',
-    timeline: '2025',
-    stack: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'React Router', 'Framer Motion', 'GitHub Actions', 'Vercel'],
-    categories: ['Web', 'Portfolio'],
-    summary:
-      'A fast, modern portfolio to showcase projects with deep case studies, resume download, and a contact form. Built for performance, accessibility, and SEO.',
-    highlights: [
-      'Typed React + Tailwind design system; dark mode and subtle animations',
-      'Projects module with cards and detailed case-study pages',
-      'Resume viewer/download and serverless-ready contact form',
-      'CI with GitHub Actions (typecheck/test/build) and Vercel deploy previews'
-    ],
-    links: {
-      repo: 'https://github.com/Sameeryadav12/portfolio',
-      demo: ''
-    },
-    sections: [
-      {
-        title: 'Engineering Focus',
-        items: [
-          'Accessibility: keyboard navigation, semantic HTML, contrast-aware palette',
-          'Performance: code splitting, image optimization; Lighthouse 95+ targets',
-          'SEO: meta/OG, sitemap, JSON-LD'
-        ]
-      }
-    ],
-    visuals: {
-      thumb: 'https://via.placeholder.com/400x300/8B5CF6/ffffff?text=Portfolio+Website',
-      banner: 'https://via.placeholder.com/800x400/8B5CF6/ffffff?text=Personal+Portfolio+Website',
-      gallery: [
-        'https://via.placeholder.com/800x600/8B5CF6/ffffff?text=Home+Page',
-        'https://via.placeholder.com/800x600/8B5CF6/ffffff?text=Projects+Page',
-        'https://via.placeholder.com/800x600/8B5CF6/ffffff?text=Contact+Form'
-      ],
-      accent: '#8B5CF6'
-    }
   }
 ]

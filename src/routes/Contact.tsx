@@ -347,6 +347,7 @@ export default function Contact() {
           </div>
         </ScrollAnimation>
       </div>
+      </div>
     </div>
   )
 }

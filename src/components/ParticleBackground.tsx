@@ -45,15 +45,19 @@ export default function ParticleBackground() {
       connectionCount: 0
     })
 
-    // Initialize particles
-    for (let i = 0; i < 120; i++) {
+    // Initialize particles (reduced for better performance)
+    for (let i = 0; i < 60; i++) {
       particles.push(createParticle())
     }
 
+    let frameCount = 0
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
-      particles.forEach((particle, index) => {
+      frameCount++
+      // Reduce frame rate for better performance
+      if (frameCount % 2 === 0) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        
+        particles.forEach((particle, index) => {
         particle.x += particle.vx
         particle.y += particle.vy
         particle.life++
@@ -103,54 +107,34 @@ export default function ParticleBackground() {
           Object.assign(particle, createParticle())
         }
 
-        // Enhanced connection algorithm with dynamic distance
+        // Simplified connection algorithm for better performance
         particle.connectionCount = 0
-        particles.slice(index + 1).forEach(otherParticle => {
-          const dx = particle.x - otherParticle.x
-          const dy = particle.y - otherParticle.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-          const maxDistance = 150 + Math.sin(particle.pulse) * 30
+        // Only check connections for every 3rd particle to reduce calculations
+        if (index % 3 === 0) {
+          particles.slice(index + 1, index + 4).forEach(otherParticle => {
+            const dx = particle.x - otherParticle.x
+            const dy = particle.y - otherParticle.y
+            const distance = Math.sqrt(dx * dx + dy * dy)
+            const maxDistance = 120
 
-          if (distance < maxDistance) {
-            particle.connectionCount++
-            otherParticle.connectionCount++
-            
-            const connectionOpacity = (1 - distance / maxDistance) * alpha * 0.4
-            const connectionHue = (particle.hue + otherParticle.hue) / 2
-            
-            // Create gradient line
-            const lineGradient = ctx.createLinearGradient(
-              particle.x, particle.y,
-              otherParticle.x, otherParticle.y
-            )
-            lineGradient.addColorStop(0, `hsla(${connectionHue}, 60%, 70%, ${connectionOpacity})`)
-            lineGradient.addColorStop(0.5, `hsla(${connectionHue}, 50%, 60%, ${connectionOpacity * 0.8})`)
-            lineGradient.addColorStop(1, `hsla(${connectionHue}, 40%, 50%, ${connectionOpacity * 0.6})`)
-
-            ctx.beginPath()
-            ctx.moveTo(particle.x, particle.y)
-            ctx.lineTo(otherParticle.x, otherParticle.y)
-            ctx.strokeStyle = lineGradient
-            ctx.lineWidth = 0.8 + Math.sin(particle.pulse) * 0.4
-            ctx.stroke()
-          }
-        })
-
-        // Add connection intensity indicator
-        if (particle.connectionCount > 3) {
-          const intensityGradient = ctx.createRadialGradient(
-            particle.x, particle.y, 0,
-            particle.x, particle.y, particle.size * 4
-          )
-          intensityGradient.addColorStop(0, `hsla(${particle.hue}, 70%, 80%, ${alpha * 0.2})`)
-          intensityGradient.addColorStop(1, `hsla(${particle.hue}, 50%, 60%, 0)`)
-
-          ctx.beginPath()
-          ctx.arc(particle.x, particle.y, particle.size * 4, 0, Math.PI * 2)
-          ctx.fillStyle = intensityGradient
-          ctx.fill()
+            if (distance < maxDistance) {
+              particle.connectionCount++
+              otherParticle.connectionCount++
+              
+              const connectionOpacity = (1 - distance / maxDistance) * alpha * 0.3
+              const connectionHue = (particle.hue + otherParticle.hue) / 2
+              
+              ctx.beginPath()
+              ctx.moveTo(particle.x, particle.y)
+              ctx.lineTo(otherParticle.x, otherParticle.y)
+              ctx.strokeStyle = `hsla(${connectionHue}, 60%, 70%, ${connectionOpacity})`
+              ctx.lineWidth = 0.5
+              ctx.stroke()
+            }
+          })
         }
       })
+      }
 
       animationId = requestAnimationFrame(animate)
     }

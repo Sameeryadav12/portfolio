@@ -48,6 +48,13 @@ const AdvancedProjectCard: React.FC<AdvancedProjectCardProps> = ({ project, inde
           alt={`${project.title} thumbnail`}
           className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
           loading="lazy"
+          onError={(e) => {
+            console.error(`Failed to load image: ${thumbnail}`)
+            e.currentTarget.src = 'https://via.placeholder.com/400x300/1e293b/cbd5e1?text=Image+Not+Found'
+          }}
+          onLoad={() => {
+            console.log(`Successfully loaded image: ${thumbnail}`)
+          }}
         />
         
         {/* Overlay Gradient */}

@@ -78,10 +78,12 @@ export const projects: Project[] = [
       }
     ],
     visuals: {
-      thumb: '/images/call-tech-icon.svg',
-      banner: '/images/call-tech-icon.svg',
+      thumb: 'https://via.placeholder.com/400x300/124E66/ffffff?text=Call-a-Technician',
+      banner: 'https://via.placeholder.com/800x400/124E66/ffffff?text=Call-a-Technician+Admin+Portal',
       gallery: [
-        '/images/call-tech-icon.svg'
+        'https://via.placeholder.com/800x600/124E66/ffffff?text=Admin+Dashboard',
+        'https://via.placeholder.com/800x600/124E66/ffffff?text=Job+Management',
+        'https://via.placeholder.com/800x600/124E66/ffffff?text=Invoice+System'
       ],
       accent: '#124E66'
     },
@@ -227,10 +229,12 @@ export const projects: Project[] = [
       }
     ],
     visuals: {
-      thumb: '/images/portfolio-icon.svg',
-      banner: '/images/portfolio-icon.svg',
+      thumb: 'https://via.placeholder.com/400x300/8B5CF6/ffffff?text=Portfolio+Website',
+      banner: 'https://via.placeholder.com/800x400/8B5CF6/ffffff?text=Personal+Portfolio+Website',
       gallery: [
-        '/images/portfolio-icon.svg'
+        'https://via.placeholder.com/800x600/8B5CF6/ffffff?text=Home+Page',
+        'https://via.placeholder.com/800x600/8B5CF6/ffffff?text=Projects+Page',
+        'https://via.placeholder.com/800x600/8B5CF6/ffffff?text=Contact+Form'
       ],
       accent: '#8B5CF6'
     }

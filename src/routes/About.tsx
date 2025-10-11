@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import { ChevronDown, ChevronUp, Code, Gamepad2, Users, Award, Coffee, Heart, Sparkles, Target, Zap, Star } from 'lucide-react'
+import { ChevronDown, ChevronUp, Code, Gamepad2, Users, Award, Coffee, Heart, Sparkles, Target, Zap, Star, GraduationCap, BookOpen, Trophy, Calendar } from 'lucide-react'
 import ScrollAnimation from '../components/ScrollAnimation'
 import ParticleBackground from '../components/ParticleBackground'
 
@@ -9,6 +9,7 @@ export default function About() {
 
   const tabs = [
     { id: 'story', label: 'My Story', icon: Heart, color: 'text-red-400' },
+    { id: 'education', label: 'Education', icon: GraduationCap, color: 'text-green-400' },
     { id: 'skills', label: 'Skills', icon: Code, color: 'text-blue-400' },
     { id: 'passions', label: 'Passions', icon: Gamepad2, color: 'text-purple-400' },
     { id: 'values', label: 'Values', icon: Award, color: 'text-yellow-400' }
@@ -77,6 +78,36 @@ export default function About() {
       icon: Award,
       color: 'text-yellow-400',
       description: 'Development workflow'
+    }
+  ]
+
+  const educationData = [
+    {
+      degree: 'Bachelor of Technology (B.Tech)',
+      field: 'Computer Science & Engineering',
+      university: 'Your University Name',
+      duration: '2021 - 2025',
+      status: 'Pursuing',
+      cgpa: '8.5/10',
+      subjects: [
+        { name: 'Data Structures & Algorithms', score: 'A+', credits: 4, grade: '9.2' },
+        { name: 'Object-Oriented Programming', score: 'A+', credits: 3, grade: '9.0' },
+        { name: 'Database Management Systems', score: 'A', credits: 4, grade: '8.8' },
+        { name: 'Computer Networks', score: 'A', credits: 3, grade: '8.5' },
+        { name: 'Software Engineering', score: 'A', credits: 3, grade: '8.7' },
+        { name: 'Web Technologies', score: 'A+', credits: 3, grade: '9.1' },
+        { name: 'Operating Systems', score: 'A-', credits: 4, grade: '8.2' },
+        { name: 'Machine Learning', score: 'A', credits: 3, grade: '8.6' },
+        { name: 'Computer Graphics', score: 'A+', credits: 3, grade: '9.3' },
+        { name: 'Mobile App Development', score: 'A+', credits: 3, grade: '9.0' }
+      ],
+      achievements: [
+        'Dean\'s List - 3 consecutive semesters',
+        'Top 10% of the class',
+        'Active member of Computer Science Society',
+        'Completed 5+ technical projects'
+      ],
+      color: 'from-green-500 to-emerald-600'
     }
   ]
 
@@ -269,6 +300,177 @@ export default function About() {
                     </div>
                   </div>
                 </div>
+              </motion.div>
+            )}
+
+            {activeTab === 'education' && (
+              <motion.div
+                key="education"
+                className="space-y-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+              >
+                {educationData.map((edu, eduIndex) => (
+                  <motion.div
+                    key={eduIndex}
+                    className="rounded-3xl p-8 relative overflow-hidden"
+                    style={{ 
+                      backgroundColor: 'var(--theme-surface)',
+                      border: '1px solid var(--theme-border)',
+                      boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.1)'
+                    }}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: eduIndex * 0.2 }}
+                  >
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-8">
+                      <div className="flex items-center gap-4">
+                        <motion.div 
+                          className="w-16 h-16 rounded-2xl flex items-center justify-center relative"
+                          style={{ 
+                            background: `linear-gradient(135deg, ${edu.color})`,
+                            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)'
+                          }}
+                          whileHover={{ scale: 1.05, rotate: 5 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <GraduationCap size={32} className="text-white" />
+                          <motion.div
+                            className="absolute inset-0 rounded-2xl border-2 border-white/30"
+                            animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0, 0.3] }}
+                            transition={{ duration: 3, repeat: Infinity }}
+                          />
+                        </motion.div>
+                        <div>
+                          <h3 className="text-2xl font-bold mb-2" style={{ color: 'var(--theme-text)' }}>
+                            {edu.degree}
+                          </h3>
+                          <p className="text-lg font-medium" style={{ color: 'var(--theme-primary)' }}>
+                            {edu.field}
+                          </p>
+                          <p className="text-sm" style={{ color: 'var(--theme-textSecondary)' }}>
+                            {edu.university}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <motion.div 
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-2"
+                          style={{ 
+                            backgroundColor: 'var(--theme-primary)',
+                            color: 'white'
+                          }}
+                          whileHover={{ scale: 1.05 }}
+                        >
+                          <Trophy size={16} />
+                          CGPA: {edu.cgpa}
+                        </motion.div>
+                        <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--theme-textSecondary)' }}>
+                          <Calendar size={16} />
+                          {edu.duration} • {edu.status}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Subjects Grid */}
+                    <div className="mb-8">
+                      <h4 className="text-xl font-semibold mb-6 flex items-center gap-2" style={{ color: 'var(--theme-text)' }}>
+                        <BookOpen size={20} />
+                        Academic Performance
+                      </h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {edu.subjects.map((subject, subIndex) => (
+                          <motion.div
+                            key={subIndex}
+                            className="group p-4 rounded-2xl border transition-all duration-300 hover:shadow-lg"
+                            style={{ 
+                              backgroundColor: 'var(--theme-background)',
+                              borderColor: 'var(--theme-border)'
+                            }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: subIndex * 0.1 }}
+                            whileHover={{ scale: 1.02, y: -2 }}
+                          >
+                            <div className="flex items-center justify-between mb-2">
+                              <h5 className="font-medium" style={{ color: 'var(--theme-text)' }}>
+                                {subject.name}
+                              </h5>
+                              <div className="flex items-center gap-2">
+                                <span 
+                                  className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                                    subject.score === 'A+' ? 'bg-green-100 text-green-800' :
+                                    subject.score === 'A' ? 'bg-blue-100 text-blue-800' :
+                                    'bg-yellow-100 text-yellow-800'
+                                  }`}
+                                >
+                                  {subject.score}
+                                </span>
+                                <span className="text-sm font-bold" style={{ color: 'var(--theme-primary)' }}>
+                                  {subject.grade}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="flex items-center justify-between text-sm" style={{ color: 'var(--theme-textSecondary)' }}>
+                              <span>{subject.credits} Credits</span>
+                              <div className="w-20 h-2 rounded-full bg-gray-200 overflow-hidden">
+                                <motion.div 
+                                  className="h-full rounded-full"
+                                  style={{ 
+                                    background: `linear-gradient(90deg, ${edu.color})`,
+                                    width: `${(parseFloat(subject.grade) / 10) * 100}%`
+                                  }}
+                                  initial={{ width: 0 }}
+                                  animate={{ width: `${(parseFloat(subject.grade) / 10) * 100}%` }}
+                                  transition={{ duration: 1, delay: subIndex * 0.1 + 0.5 }}
+                                />
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Achievements */}
+                    <div>
+                      <h4 className="text-xl font-semibold mb-6 flex items-center gap-2" style={{ color: 'var(--theme-text)' }}>
+                        <Award size={20} />
+                        Achievements & Recognition
+                      </h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {edu.achievements.map((achievement, achIndex) => (
+                          <motion.div
+                            key={achIndex}
+                            className="flex items-center gap-3 p-4 rounded-2xl"
+                            style={{ 
+                              backgroundColor: 'var(--theme-background)',
+                              border: '1px solid var(--theme-border)'
+                            }}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: achIndex * 0.1 }}
+                            whileHover={{ scale: 1.02, x: 5 }}
+                          >
+                            <motion.div 
+                              className="w-8 h-8 rounded-full flex items-center justify-center"
+                              style={{ backgroundColor: 'var(--theme-primary)20' }}
+                              whileHover={{ rotate: 360 }}
+                              transition={{ duration: 0.6 }}
+                            >
+                              <Star size={16} style={{ color: 'var(--theme-primary)' }} />
+                            </motion.div>
+                            <span style={{ color: 'var(--theme-textSecondary)' }}>
+                              {achievement}
+                            </span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
             )}
 

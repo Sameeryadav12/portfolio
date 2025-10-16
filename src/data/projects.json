@@ -1,0 +1,46 @@
+[
+  {
+    "slug": "call-a-technician",
+    "title": "Call-a-Technician Admin Portal",
+    "role": "Full-Stack Developer",
+    "timeline": "2025 – Ongoing",
+    "stack": ["React", "Node.js", "Express.js", "MongoDB", "TailwindCSS"],
+    "summary": "Web admin platform for jobs, invoices, technicians, and scheduling.",
+    "highlights": [
+      "Implemented job creation, technician assignment, and automated pricing logic",
+      "Invoice management with job-invoice syncing and consistency checks",
+      "Dashboards and KPI cards for real-time tracking",
+      ">30% manual workload reduction",
+      "Team of 5; one of two full-stack engineers"
+    ],
+    "links": { "repo": "", "demo": "", "youtube": "" }
+  },
+  {
+    "slug": "balance-3d",
+    "title": "Balance 3D",
+    "role": "Solo Developer",
+    "timeline": "2021 – 2022",
+    "stack": ["Unity", "C#"],
+    "summary": "Physics-based 3D ball-balancing game with 12 levels (previously on Google Play Store).",
+    "highlights": [
+      "Designed mechanics, animations, and levels end-to-end",
+      "Published with 1,000+ downloads",
+      "Performance optimization to improve playability"
+    ],
+    "links": { "repo": "", "store": "", "youtube": "" }
+  },
+  {
+    "slug": "space-exploration-3d",
+    "title": "Space Exploration 3D (ATL Space Challenge)",
+    "role": "Lead Developer (3-member team)",
+    "timeline": "2021",
+    "stack": ["Unity", "C#"],
+    "summary": "Educational solar system exploration app with interactive 3D planet models.",
+    "highlights": [
+      "Implemented planet models, animations, and interactive navigation",
+      "Added scientific details to enhance learning value",
+      "Owned core technical development"
+    ],
+    "links": { "repo": "", "demo": "", "youtube": "" }
+  }
+]

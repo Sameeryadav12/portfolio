@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sameer Yadav — Portfolio</title>
+    <style>
+      /* minimal styles so the boot banner is visible before React */
+      html,body,#root{height:100%} body{margin:0;background:#0b1220;color:#e8edf2;font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto}
+      .boot {
+        position: fixed; inset: 0; display:grid; place-items:center; z-index: 9999;
+        background: rgba(11,18,32,.96); color:#e8edf2; text-align:center; padding:24px
+      }
+      .boot .card {
+        max-width: 720px; padding:16px; border:1px solid #384057; border-radius:14px;
+        background: rgba(255,255,255,.03)
+      }
+      .boot pre{ text-align:left; white-space:pre-wrap; background:rgba(255,255,255,.06);
+        border:1px solid #384057; border-radius:12px; padding:10px; overflow:auto }
+    </style>
+    <!-- SEO -->
+<meta name="description" content="Sameer Yadav — Backend-leaning Full-Stack Developer & Unity 3D Maker. React, TypeScript, Node.js, Express, MongoDB, Unity C#. View my projects, case studies, and resume." />
+<meta name="keywords" content="Sameer Yadav, Software Engineer, Full-Stack Developer, Unity Developer, React, TypeScript, Node.js, Express, MongoDB, C#, Game Development, Web Development" />
+<link rel="canonical" href="https://portfolio-cyan-nine-94.vercel.app/" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Sameer Yadav — Full-Stack Developer & Unity 3D Maker" />
+<meta property="og:description" content="Backend-leaning Full-Stack Developer specializing in React, TypeScript, Node.js, and Unity 3D game development. View my projects and case studies." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://portfolio-cyan-nine-94.vercel.app/" />
+<meta property="og:image" content="https://portfolio-cyan-nine-94.vercel.app/og-cover.jpg" />
+<meta property="og:site_name" content="Sameer Yadav Portfolio" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Sameer Yadav — Full-Stack Developer & Unity 3D Maker" />
+<meta name="twitter:description" content="Backend-leaning Full-Stack Developer specializing in React, TypeScript, Node.js, and Unity 3D game development." />
+<meta name="twitter:image" content="https://portfolio-cyan-nine-94.vercel.app/og-cover.jpg" />
+
+<!-- Optional: Structured data (Person + WebSite) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Sameer Yadav",
+  "jobTitle": "Backend-leaning Full-Stack Developer & Unity 3D Maker",
+  "description": "Full-Stack Developer specializing in React, TypeScript, Node.js, Express, MongoDB, and Unity 3D game development",
+  "url": "https://portfolio-cyan-nine-94.vercel.app/",
+  "email": "rishisameer7@gmail.com",
+  "sameAs": [
+    "https://github.com/Sameeryadav12",
+    "https://www.linkedin.com/in/sameer-yadav-5502a4203/"
+  ],
+  "knowsAbout": [
+    "React",
+    "TypeScript", 
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "Unity 3D",
+    "C#",
+    "Game Development",
+    "Web Development",
+    "Full-Stack Development"
+  ]
+}
+</script>
+
+  </head>
+  <body>
+    <!-- React root -->
+    <div id="root"></div>
+
+    <!-- Boot banner: removed when React mounts, or shows error text if something crashes early -->
+    <div id="boot" class="boot" aria-live="polite">
+      <div class="card">
+        <h2 style="margin:0 0 6px">Launching portfolio…</h2>
+        <div id="boot-msg" style="opacity:.85">If this stays here, something prevented React from rendering.</div>
+        <pre id="boot-error" style="display:none;margin-top:10px"></pre>
+      </div>
+    </div>
+
+    <script>
+      // capture any early script or runtime errors and show them in the boot banner
+      (function () {
+        const show = (msg) => {
+          const el = document.getElementById('boot-error');
+          if (el) { el.style.display = 'block'; el.textContent += String(msg || '') + '\n'; }
+        };
+        window.addEventListener('error', (e) => show(e?.error?.stack || e?.message));
+        window.addEventListener('unhandledrejection', (e) => show(e?.reason?.stack || e?.reason || 'Unhandled promise rejection'));
+        // react will set window.__APP_MOUNTED__ = true (see main.tsx). If not set after 3s, we keep the banner visible.
+        setTimeout(() => {
+          if (window.__APP_MOUNTED__) return;
+          const m = document.getElementById('boot-msg');
+          if (m) m.textContent = 'React didn’t mount. See any error below.';
+        }, 3000);
+      })();
+    </script>
+
+    <script type="module" src="/src/boot.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# builds
+dist/
+build/
+
+# env & local
+.env
+.env.*
+!.env.example
+.vercel/
+*.local
+
+# tooling
+coverage/
+.vscode/
+.idea/
+.DS_Store
+
+.vercel

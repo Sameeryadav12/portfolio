@@ -23,17 +23,9 @@
       "dest": "/$1"
     }
   ],
-  "env": {
-    "NODE_VERSION": "18"
-  },
   "functions": {
     "api/contact.js": {
       "runtime": "nodejs18.x"
-    }
-  },
-  "build": {
-    "env": {
-      "NODE_VERSION": "18"
     }
   }
 }

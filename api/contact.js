@@ -1,4 +1,5 @@
 // api/contact.js
+// Node.js version: 18.x
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)

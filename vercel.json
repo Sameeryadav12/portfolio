@@ -7,25 +7,12 @@
       "config": {
         "distDir": "dist"
       }
-    },
-    {
-      "src": "api/contact.js",
-      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "/$1"
     }
-  ],
-  "functions": {
-    "api/contact.js": {
-      "runtime": "nodejs18.x"
-    }
-  }
+  ]
 }

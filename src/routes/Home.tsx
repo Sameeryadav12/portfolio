@@ -6,14 +6,13 @@ import TypingAnimation from '../components/TypingAnimation'
 import ScrollAnimation from '../components/ScrollAnimation'
 import { projects } from '../data/projects'
 import { testimonials } from '../data/testimonials'
-import { toIconItems } from '../lib/techIcons'
-import TechLogos from '../components/TechLogos'
 
 export default function Home() {
   const featuredProjects = projects.slice(0, 3)
   const featuredTestimonials = testimonials.slice(0, 3)
   const { scrollYProgress } = useScroll()
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
+  
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -425,7 +424,7 @@ export default function Home() {
               {featuredProjects.map((project, index) => (
                 <Link key={project.slug} to={`/projects/${project.slug}`}>
                   <motion.div
-                    className="group relative overflow-hidden rounded-3xl shadow-2xl border-2 cursor-pointer block"
+                    className="group relative overflow-hidden rounded-3xl shadow-2xl border-2 cursor-pointer flex flex-col"
                     style={{ 
                       backgroundColor: 'var(--theme-surface)',
                       borderColor: 'var(--theme-border)'
@@ -519,7 +518,7 @@ export default function Home() {
                     )}
                   </div>
                   
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-grow">
                     <div className="flex items-start justify-between mb-3">
                       <h3 className="text-xl font-bold" style={{ color: 'var(--theme-text)' }}>
                         {project.title}
@@ -536,15 +535,65 @@ export default function Home() {
                       </motion.div>
                     </div>
                     
-                    <p className="text-sm mb-4 line-clamp-2" style={{ color: 'var(--theme-textSecondary)' }}>
+                    <p className="text-sm mb-4" style={{ color: 'var(--theme-textSecondary)' }}>
                       {project.summary}
                     </p>
                     
                     <div className="mb-4">
-                      <TechLogos items={toIconItems(project.stack.slice(0, 4))} />
+                      {/* Tech stack with icons */}
+                      <div className="flex flex-wrap gap-2">
+                        {project.stack.slice(0, 4).map((tech) => {
+                          // Simple icon mapping
+                          let iconSrc = null;
+                          const techLower = tech.toLowerCase();
+                          
+                          if (techLower.includes('react')) iconSrc = '/images/tech-icons/icons-png/react.png';
+                          else if (techLower.includes('typescript')) iconSrc = '/images/tech-icons/icons-png/typescript.png';
+                          else if (techLower.includes('node')) iconSrc = '/images/tech-icons/icons-png/nodejs.png';
+                          else if (techLower.includes('express')) iconSrc = '/images/tech-icons/icons-png/expressjs.png';
+                          else if (techLower.includes('mongodb')) iconSrc = '/images/tech-icons/icons-png/mongodb.png';
+                          else if (techLower.includes('tailwind')) iconSrc = '/images/tech-icons/icons-png/tailwindcss.png';
+                          else if (techLower.includes('jwt')) iconSrc = '/images/tech-icons/icons-png/jwt.png';
+                          else if (techLower.includes('fullcalendar')) iconSrc = '/images/tech-icons/icons-png/fullcalendar.png';
+                          else if (techLower.includes('react query')) iconSrc = '/images/tech-icons/icons-png/react-query.png';
+                          else if (techLower.includes('unity')) iconSrc = '/images/tech-icons/icons-png/unity.png';
+                          else if (techLower.includes('c#')) iconSrc = '/images/tech-icons/icons-png/csharp.png';
+                          else if (techLower.includes('blender')) iconSrc = '/images/tech-icons/icons-png/blender.png';
+                          else if (techLower.includes('photoshop')) iconSrc = '/images/tech-icons/icons-png/photoshop.png';
+                          else if (techLower.includes('figma')) iconSrc = '/images/tech-icons/icons-png/figma.png';
+                          else if (techLower.includes('design')) iconSrc = '/images/tech-icons/icons-png/design.png';
+                          else if (techLower.includes('vite')) iconSrc = '/images/tech-icons/icons-png/vite.png';
+                          else if (techLower.includes('docker')) iconSrc = '/images/tech-icons/icons-png/docker.png';
+                          else if (techLower.includes('postgresql')) iconSrc = '/images/tech-icons/icons-png/postgresql.png';
+                          else if (techLower.includes('redis')) iconSrc = '/images/tech-icons/icons-png/redis.png';
+                          else if (techLower.includes('socket')) iconSrc = '/images/tech-icons/icons-png/socketio.png';
+                          else if (techLower.includes('expo')) iconSrc = '/images/tech-icons/icons-png/expo.png';
+                          else if (techLower.includes('prisma')) iconSrc = '/images/tech-icons/icons-png/prisma.png';
+                          else if (techLower.includes('stripe')) iconSrc = '/images/tech-icons/icons-png/stripe.png';
+                          else if (techLower.includes('notification')) iconSrc = '/images/tech-icons/icons-png/notification.png';
+                          else if (techLower.includes('security') || techLower.includes('bcrypt')) iconSrc = '/images/tech-icons/icons-png/security.png';
+                          else if (techLower.includes('framer')) iconSrc = '/images/tech-icons/icons-png/framer.png';
+                          
+                          return (
+                            <div key={tech} className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-700 text-slate-300 text-sm">
+                              {iconSrc && (
+                                <img 
+                                  src={iconSrc} 
+                                  alt={tech}
+                                  className="w-4 h-4"
+                                  onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                  }}
+                                />
+                              )}
+                              <span className="font-medium">{tech}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                     
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mt-auto">
                       <motion.div
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}

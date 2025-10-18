@@ -41,19 +41,24 @@ export const projects: Project[] = [
   {
     slug: 'call-a-technician',
     title: 'Call-a-Technician Admin Portal',
-    role: 'Full-Stack Developer',
+    role: 'Full-Stack Developer & Technical Lead',
     timeline: '2025 – Ongoing',
-    stack: ['React', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'TailwindCSS'],
-    categories: ['Web', 'Backend'],
+    stack: ['React', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'TailwindCSS', 'JWT', 'FullCalendar', 'React Query'],
+    categories: ['Web', 'Backend', 'Full-Stack', 'Business Management'],
     summary:
-      'Web admin platform for jobs, invoices, technicians, and scheduling with KPI dashboards and invoice syncing.',
+      'Comprehensive business management system with job lifecycle management, advanced pricing system, CRM, technician management, invoice & billing, visual scheduling, and marketing integration. Features 50+ API endpoints, real-time updates, and secure authentication.',
     highlights: [
-      'Implemented job creation, technician assignment, and automated pricing logic',
-      'Invoice management with job–invoice syncing and consistency checks',
-      'Dashboards and KPI cards for real-time tracking (open/closed/overdue)',
-      'Reduced manual workload by 30%+ via streamlined flows and data integrity',
-      'Led full-stack development for admin and technician portals (backend, frontend, database)',
-      'Team of 5: Priyanshu (Scrum Master), Vin (Company Website), Vijaya (Testing/Docs), Quinh (Frontend), Sameer (Full-Stack Admin/Technician Portals)'
+      'Built complete job lifecycle management: creation, assignment, scheduling, tracking, and completion with automated pricing logic',
+      'Advanced pricing system: $165 base (2 hours) + $20.625 per 15-min increments + software licensing + pension/social media discounts',
+      'Comprehensive CRM: customer database with 5-digit auto-generated IDs, address autocomplete for 200+ SA locations, and customer history tracking',
+      'Technician management: staff scheduling, time-off tracking, working hours, skills management, and conflict detection system',
+      'Professional invoicing: job-invoice syncing, real-time calculations, print-ready invoices, CSV export/import, and status tracking',
+      'Interactive calendar: drag-drop scheduling, FullCalendar integration, technician filtering, time-off visualization, and conflict prevention',
+      'Marketing integration: incoming job requests from website with image uploads, customer details, and automated job ID generation',
+      'Real-time updates: React Query for data synchronization, optimistic updates, and automatic cache management',
+      'Secure authentication: JWT-based auth with 7-day expiration, bcrypt password hashing, protected routes, and user-scoped data access',
+      'Reduced manual workload by 30%+ through streamlined workflows, automated calculations, and data integrity checks',
+      'Led full-stack development for admin and technician portals (backend, frontend, database) with team of 5 developers'
     ],
     links: {
       repo: 'https://github.com/Sameeryadav12/portfolio',
@@ -61,35 +66,72 @@ export const projects: Project[] = [
     },
     sections: [
       {
-        title: 'Key Decisions',
+        title: 'System Architecture',
         items: [
-          'MongoDB for flexible job/invoice schema; indexed queries for KPI cards',
-          'Server-side pagination and validation in Express',
-          'JWT-based auth; print-friendly invoice view for finance'
+          'Frontend: React 18 with Hooks, Vite, TailwindCSS, React Query, React Router v6, FullCalendar',
+          'Backend: Express.js REST API, MongoDB + Mongoose, JWT authentication, bcrypt password hashing',
+          'Database: 6 models (User, Job, Invoice, Technician, Customer, IncomingJobRequest) with indexed queries',
+          '50+ API endpoints covering authentication, jobs, invoices, technicians, customers, and time-off management'
         ]
       },
       {
-        title: 'What I’d Improve Next',
+        title: 'Key Features Implemented',
         items: [
-          'Roster/columns schedule with conflict warnings',
-          'Recurring jobs + calendar sync (iCal/Google)',
-          'Background worker to pre-aggregate KPIs for large datasets'
+          'Job Management: Create/edit jobs with customer auto-suggest, technician assignment, scheduling, and status tracking',
+          'Pricing System: Base $165 + additional time pricing + software licensing + stackable discounts (pension 10%, social 5%)',
+          'Customer CRM: 5-digit auto-generated IDs, comprehensive SA address database, customer history, and quick job creation',
+          'Technician Management: Staff profiles, skills tracking, working hours, time-off management, and availability checking',
+          'Invoice System: Professional invoicing with job sync, real-time calculations, print views, and CSV export/import',
+          'Calendar Scheduling: Drag-drop interface, conflict detection, technician filtering, and time-off visualization',
+          'Marketing Integration: Public job request endpoint with image uploads and automated processing'
+        ]
+      },
+      {
+        title: 'Technical Achievements',
+        items: [
+          'Built 7 main pages with 5,330+ lines of code across dashboard, CRM, technician management, invoicing, and scheduling',
+          'Implemented comprehensive data validation: client-side and server-side validation with conflict detection',
+          'Created real-time KPI dashboards: job counts by status, invoice totals, overdue tracking, and technician metrics',
+          'Developed secure authentication system: JWT tokens, protected routes, user-scoped data access, and session management',
+          'Optimized performance: React Query caching, MongoDB indexing, debounced search, and optimistic updates'
+        ]
+      },
+      {
+        title: 'Business Impact',
+        items: [
+          'Reduced manual workload by 30%+ through automated pricing, job-invoice syncing, and streamlined workflows',
+          'Improved data integrity with comprehensive validation, conflict detection, and real-time synchronization',
+          'Enhanced customer experience with address autocomplete, automated job creation, and professional invoicing',
+          'Streamlined technician management with scheduling, time-off tracking, and availability checking',
+          'Enabled data-driven decisions with real-time KPIs, export capabilities, and comprehensive reporting'
+        ]
+      },
+      {
+        title: 'What I Would Improve Next',
+        items: [
+          'Advanced calendar features: recurring jobs, iCal/Google Calendar sync, and roster view with conflict warnings',
+          'Enhanced reporting: background workers for KPI pre-aggregation, advanced analytics, and custom dashboards',
+          'Mobile optimization: dedicated mobile app or PWA for technicians in the field',
+          'Integration capabilities: payment processing, email notifications, and third-party service integrations',
+          'Advanced features: job templates, bulk operations, advanced search filters, and automated workflows'
         ]
       }
     ],
     visuals: {
-      thumb: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMTI0RTY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IndoaXRlIiByeD0iMTAiLz4KPHRleHQgeD0iMjAwIiB5PSIxNDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzEyNEU2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q2FsbC1hLVRlY2huaWNpYW48L3RleHQ+Cjx0ZXh0IHg9IjIwMCIgeT0iMTgwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiMxMjRFNjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkFkbWluIFBvcnRhbDwvdGV4dD4KPC9zdmc+',
-      banner: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMTI0RTY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjcwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IndoaXRlIiByeD0iMTUiLz4KPHRleHQgeD0iNDAwIiB5PSIyMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0OCIgZmlsbD0iIzEyNEU2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q2FsbC1hLVRlY2huaWNpYW48L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iMjUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiMxMjRFNjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkFkbWluIFBvcnRhbDwvdGV4dD4KPC9zdmc+',
+      thumb: '/images/call-a-technician-thumbnail.jpg',
+      banner: '/images/call-a-technician-thumbnail.jpg',
       gallery: [
-        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDgwMCA2MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMTI0RTY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjcwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9IndoaXRlIiByeD0iMTUiLz4KPHRleHQgeD0iNDAwIiB5PSIzMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0OCIgZmlsbD0iIzEyNEU2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QWRtaW4gRGFzaGJvYXJkPC90ZXh0Pgo8L3N2Zz4=',
-        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDgwMCA2MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMTI0RTY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjcwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9IndoaXRlIiByeD0iMTUiLz4KPHRleHQgeD0iNDAwIiB5PSIzMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0OCIgZmlsbD0iIzEyNEU2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Sm9iIE1hbmFnZW1lbnQ8L3RleHQ+Cjwvc3ZnPg==',
-        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDgwMCA2MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMTI0RTY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjcwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9IndoaXRlIiByeD0iMTUiLz4KPHRleHQgeD0iNDAwIiB5PSIzMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0OCIgZmlsbD0iIzEyNEU2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW52b2ljZSBTeXN0ZW08L3RleHQ+Cjwvc3ZnPg=='
+        '/images/call-a-technician-thumbnail.jpg'
       ],
       accent: '#124E66'
     },
     stats: [
-      { label: 'Manual Work', value: '−30%+' },
-      { label: 'Team Size', value: '5' }
+      { label: 'Manual Work Reduction', value: '−30%+' },
+      { label: 'Team Size', value: '5' },
+      { label: 'API Endpoints', value: '50+' },
+      { label: 'Database Models', value: '6' },
+      { label: 'Lines of Code', value: '5,330+' },
+      { label: 'Features', value: '95% Complete' }
     ]
   },
 
@@ -133,10 +175,18 @@ export const projects: Project[] = [
       }
     ],
     visuals: {
-      thumb: '/images/balance 3d thumbnail.png',
-      banner: '/images/balance 3d thumbnail.png',
+      thumb: '/images/balance%203d%20thumbnail.png',
+      banner: '/images/balance%203d%20thumbnail.png',
       gallery: [
-        '/images/balance 3d thumbnail.png'
+        '/images/balance%203d%20thumbnail.png',
+        '/images/balance-3d/Image%201.png',
+        '/images/balance-3d/Image%202.png',
+        '/images/balance-3d/Image%203.png',
+        '/images/balance-3d/Image%204.png',
+        '/images/balance-3d/Image%205.png',
+        '/images/balance-3d/Image%206.png',
+        '/images/balance-3d/Image%207.png',
+        '/images/balance-3d/Image%208.png'
       ],
       accent: '#31EE88'
     },
@@ -182,20 +232,24 @@ export const projects: Project[] = [
         ]
       }
     ],
-  visuals: {
-    thumb: '/images/atl-space/Screenshot 2025-10-11 113157.png',
-    banner: '/images/atl-space/Screenshot 2025-10-11 113321.png',
-    gallery: [
-      '/images/atl-space/Screenshot 2025-10-11 113157.png',
-      '/images/atl-space/Screenshot 2025-10-11 113321.png',
-      '/images/atl-space/Screenshot 2025-10-11 113357.png',
-      '/images/atl-space/Screenshot 2025-10-11 113426.png'
-    ],
-    accent: '#52D5FF'
-  },
-    stats: [
-      { label: 'Bodies', value: '20+' },
-      { label: 'Mode', value: 'Free-fly + Click-focus' }
-    ]
-  }
+    visuals: {
+      thumb: '/images/atl-space/atl1.png',
+      banner: '/images/atl-space/atl1.png',
+      gallery: [
+        '/images/atl-space/atl1.png',
+        '/images/atl-space/atl2.png',
+        '/images/atl-space/atl3.png',
+        '/images/atl-space/atl4.png',
+        '/images/atl-space/atl5.png',
+        '/images/atl-space/atl6.png',
+        '/images/atl-space/atl7.png',
+        '/images/atl-space/atl8.png'
+      ],
+      accent: '#52D5FF'
+    },
+  stats: [
+    { label: 'Bodies', value: '20+' },
+    { label: 'Mode', value: 'Free-fly + Click-focus' }
+  ]
+}
 ]

@@ -45,6 +45,9 @@ import prismaIcon        from '../assets/icons/prisma.svg'       // ✅ add Pris
 import dockerIcon        from '../assets/icons/docker.svg'       // ✅ add Docker
 import postgresIcon      from '../assets/icons/postgresql.svg'   // ✅ add PostgreSQL
 import designIcon        from '../assets/icons/design.svg'       // ✅ unique design icon
+import jwtIcon           from '../assets/icons/jwt.svg'          // ✅ JWT
+import fullcalendarIcon  from '../assets/icons/fullcalendar.svg' // ✅ FullCalendar
+import reactQueryIcon    from '../assets/icons/react-query.svg'  // ✅ React Query
 
 // ==== FALLBACK PREFERENCES ====
 // Pick the best-looking version if dupes exist
@@ -66,23 +69,40 @@ export type IconItem = { key: string; name: string; src: string }
 const ICONS: Record<string, IconItem> = {
   // Core web stack
   'react':          { key: 'react',    name: 'React',          src: REACT },
+  'react.js':       { key: 'react',    name: 'React',          src: REACT },
+  'reactjs':        { key: 'react',    name: 'React',          src: REACT },
   'typescript':     { key: 'ts',       name: 'TypeScript',     src: tsIcon },
+  'ts':             { key: 'ts',       name: 'TypeScript',     src: tsIcon },
+  'node':           { key: 'node',     name: 'Node.js',        src: NODE },
   'node.js':        { key: 'node',     name: 'Node.js',        src: NODE },
   'nodejs':         { key: 'node',     name: 'Node.js',        src: NODE },
   'express.js':     { key: 'express',  name: 'Express.js',     src: expressIcon },
-  'express':        { key: 'express',  name: 'Express.js',     src: expressIcon },
+  'express':        { key: 'express',  name: 'Express',        src: expressIcon },
+  'expressjs':      { key: 'express',  name: 'Express.js',     src: expressIcon },
   'mongodb':        { key: 'mongo',    name: 'MongoDB',        src: mongoIcon },
+  'mongo':          { key: 'mongo',    name: 'MongoDB',        src: mongoIcon },
   'tailwind':       { key: 'tailwind', name: 'Tailwind CSS',   src: TAILWIND },
+  'tailwind css':   { key: 'tailwind', name: 'Tailwind CSS',   src: TAILWIND },
   'tailwindcss':    { key: 'tailwind', name: 'Tailwind CSS',   src: TAILWIND },
+  'TailwindCSS':    { key: 'tailwind', name: 'Tailwind CSS',   src: TAILWIND },
   'vite':           { key: 'vite',     name: 'Vite',           src: viteIcon },
   'prisma':         { key: 'prisma',   name: 'Prisma',         src: prismaIcon },
   'docker':         { key: 'docker',   name: 'Docker',         src: dockerIcon },
   'postgresql':     { key: 'pg',       name: 'PostgreSQL',     src: postgresIcon },
+  'postgres':       { key: 'pg',       name: 'PostgreSQL',     src: postgresIcon },
   'sql':            { key: 'pg',       name: 'SQL',            src: postgresIcon },
+  
+  // Additional technologies
+  'jwt':            { key: 'jwt',      name: 'JWT',            src: jwtIcon },
+  'fullcalendar':   { key: 'calendar', name: 'FullCalendar',   src: fullcalendarIcon },
+  'react query':    { key: 'rq',       name: 'React Query',    src: reactQueryIcon },
+  'react-query':    { key: 'rq',       name: 'React Query',    src: reactQueryIcon },
 
   // Web basics
   'html':           { key: 'html',     name: 'HTML5',          src: HTML },
+  'html5':          { key: 'html',     name: 'HTML5',          src: HTML },
   'css':            { key: 'css',      name: 'CSS',            src: CSS },
+  'css3':           { key: 'css',      name: 'CSS3',           src: CSS },
   'javascript':     { key: 'js',       name: 'JavaScript',     src: JS },
   'js':             { key: 'js',       name: 'JavaScript',     src: JS },
   'python':         { key: 'py',       name: 'Python',         src: pythonIcon },
@@ -95,11 +115,16 @@ const ICONS: Record<string, IconItem> = {
 
   // Game & design
   'c#':             { key: 'csharp',   name: 'C#',             src: csharpIcon },
+  'csharp':         { key: 'csharp',   name: 'C#',             src: csharpIcon },
   'unity':          { key: 'unity',    name: 'Unity',          src: unityIcon },
+  'unity3d':        { key: 'unity',    name: 'Unity 3D',       src: unityIcon },
+  'unity 3d':       { key: 'unity',    name: 'Unity 3D',       src: unityIcon },
   'blender':        { key: 'blender',  name: 'Blender',        src: blenderIcon },
   'figma':          { key: 'figma',    name: 'Figma',          src: FIGMA },
   'photoshop':      { key: 'ps',       name: 'Photoshop',      src: photoshopIcon },
+  'adobe photoshop':{ key: 'ps',       name: 'Photoshop',      src: photoshopIcon },
   'graphic design': { key: 'design',   name: 'Graphic Design', src: designIcon },
+  'design':         { key: 'design',   name: 'Design',         src: designIcon },
 
   // Fallback generic
   'programming':    { key: 'prog',     name: 'Programming',    src: programmingIcon },
@@ -119,10 +144,17 @@ export function toIconItems(tech?: string[]): IconItem[] {
   const out: IconItem[] = []
 
   for (const t of tech) {
-    const norm = normalize(t)
-    if (seen.has(norm)) continue // skip duplicates
-    seen.add(norm)
-    out.push(ICONS[norm] || { key: norm, name: t, src: programmingIcon })
+    // Handle combined technologies like "Photoshop/Figma"
+    const techs = t.split('/').map(tech => tech.trim())
+    
+    for (const singleTech of techs) {
+      const norm = normalize(singleTech)
+      if (seen.has(norm)) continue // skip duplicates
+      seen.add(norm)
+      const iconItem = ICONS[norm] || { key: norm, name: singleTech, src: null }
+      console.log(`🔍 toIconItems: "${singleTech}" → "${norm}" →`, iconItem)
+      out.push(iconItem)
+    }
   }
 
   return out

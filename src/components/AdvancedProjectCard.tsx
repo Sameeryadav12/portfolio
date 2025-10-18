@@ -2,8 +2,6 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Project } from '../data/projects'
-import { toIconItems } from '../lib/techIcons'
-import TechLogos from './TechLogos'
 import { ArrowRight, Github, Globe, Star, Zap, Award } from 'lucide-react'
 
 interface AdvancedProjectCardProps {
@@ -14,11 +12,12 @@ interface AdvancedProjectCardProps {
 const AdvancedProjectCard: React.FC<AdvancedProjectCardProps> = ({ project, index }) => {
   const accent = project.visuals?.accent ?? 'var(--theme-primary)'
   const thumbnail = project.visuals?.thumb || 'https://via.placeholder.com/400x300/1e293b/cbd5e1?text=Project+Image'
+  
 
   return (
     <Link to={`/projects/${project.slug}`}>
       <motion.article
-        className="group relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer block"
+        className="group relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer h-full flex flex-col"
         style={{ 
           backgroundColor: 'var(--theme-surface)',
           boxShadow: 'var(--theme-shadow)'
@@ -42,20 +41,20 @@ const AdvancedProjectCard: React.FC<AdvancedProjectCardProps> = ({ project, inde
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
       
       {/* Thumbnail */}
-      <div className="relative h-56 w-full overflow-hidden">
+      <div className="relative h-56 w-full overflow-hidden bg-slate-800">
         <img
           src={thumbnail}
           alt={`${project.title} thumbnail`}
           className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
-          loading="lazy"
+          loading="eager"
           onError={(e) => {
             console.error(`Failed to load image: ${thumbnail}`)
-            e.currentTarget.src = 'https://via.placeholder.com/400x300/1e293b/cbd5e1?text=Image+Not+Found'
           }}
           onLoad={() => {
-            console.log(`Successfully loaded image: ${thumbnail}`)
+            // Image loaded successfully
           }}
         />
+        
         
         {/* Overlay Gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -106,7 +105,7 @@ const AdvancedProjectCard: React.FC<AdvancedProjectCardProps> = ({ project, inde
       </div>
 
       {/* Body */}
-      <div className="relative p-6 z-20">
+      <div className="relative p-6 z-20 flex flex-col flex-grow">
         <div className="flex items-start justify-between gap-3 mb-4">
           <h3 className="text-xl font-bold group-hover:text-blue-400 transition-colors duration-300" style={{ color: 'var(--theme-text)' }}>
             {project.title}
@@ -116,17 +115,66 @@ const AdvancedProjectCard: React.FC<AdvancedProjectCardProps> = ({ project, inde
           </div>
         </div>
 
-        <p className="text-sm leading-relaxed mb-6 line-clamp-3" style={{ color: 'var(--theme-textSecondary)' }}>
+        <p className="text-sm leading-relaxed mb-6 line-clamp-3 flex-grow" style={{ color: 'var(--theme-textSecondary)' }}>
           {project.summary}
         </p>
 
         {/* Tech Stack */}
         <div className="mb-6">
-          <TechLogos items={toIconItems(project.stack)} />
+          <div className="flex flex-wrap gap-2">
+            {project.stack.map((tech) => {
+              // Simple icon mapping
+              let iconSrc = null;
+              const techLower = tech.toLowerCase();
+              
+              if (techLower.includes('react')) iconSrc = '/images/tech-icons/icons-png/react.png';
+              else if (techLower.includes('typescript')) iconSrc = '/images/tech-icons/icons-png/typescript.png';
+              else if (techLower.includes('node')) iconSrc = '/images/tech-icons/icons-png/nodejs.png';
+              else if (techLower.includes('express')) iconSrc = '/images/tech-icons/icons-png/expressjs.png';
+              else if (techLower.includes('mongodb')) iconSrc = '/images/tech-icons/icons-png/mongodb.png';
+              else if (techLower.includes('tailwind')) iconSrc = '/images/tech-icons/icons-png/tailwindcss.png';
+              else if (techLower.includes('jwt')) iconSrc = '/images/tech-icons/icons-png/jwt.png';
+              else if (techLower.includes('fullcalendar')) iconSrc = '/images/tech-icons/icons-png/fullcalendar.png';
+              else if (techLower.includes('react query')) iconSrc = '/images/tech-icons/icons-png/react-query.png';
+              else if (techLower.includes('unity')) iconSrc = '/images/tech-icons/icons-png/unity.png';
+              else if (techLower.includes('c#')) iconSrc = '/images/tech-icons/icons-png/csharp.png';
+              else if (techLower.includes('blender')) iconSrc = '/images/tech-icons/icons-png/blender.png';
+              else if (techLower.includes('photoshop')) iconSrc = '/images/tech-icons/icons-png/photoshop.png';
+              else if (techLower.includes('figma')) iconSrc = '/images/tech-icons/icons-png/figma.png';
+              else if (techLower.includes('design')) iconSrc = '/images/tech-icons/icons-png/design.png';
+              else if (techLower.includes('vite')) iconSrc = '/images/tech-icons/icons-png/vite.png';
+              else if (techLower.includes('docker')) iconSrc = '/images/tech-icons/icons-png/docker.png';
+              else if (techLower.includes('postgresql')) iconSrc = '/images/tech-icons/icons-png/postgresql.png';
+              else if (techLower.includes('redis')) iconSrc = '/images/tech-icons/icons-png/redis.png';
+              else if (techLower.includes('socket')) iconSrc = '/images/tech-icons/icons-png/socketio.png';
+              else if (techLower.includes('expo')) iconSrc = '/images/tech-icons/icons-png/expo.png';
+              else if (techLower.includes('prisma')) iconSrc = '/images/tech-icons/icons-png/prisma.png';
+              else if (techLower.includes('stripe')) iconSrc = '/images/tech-icons/icons-png/stripe.png';
+              else if (techLower.includes('notification')) iconSrc = '/images/tech-icons/icons-png/notification.png';
+              else if (techLower.includes('security') || techLower.includes('bcrypt')) iconSrc = '/images/tech-icons/icons-png/security.png';
+              else if (techLower.includes('framer')) iconSrc = '/images/tech-icons/icons-png/framer.png';
+              
+              return (
+                <div key={tech} className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-700 text-slate-300 text-sm">
+                  {iconSrc && (
+                    <img 
+                      src={iconSrc} 
+                      alt={tech}
+                      className="w-4 h-4"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  )}
+                  <span className="font-medium">{tech}</span>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 mt-auto">
           {project.links?.repo && (
             <motion.a
               href={project.links.repo}

@@ -3,8 +3,6 @@ import { projects } from '../data/projects'
 import { ArrowLeft, Github, ExternalLink, Youtube, Store, Star, Zap, Award, Clock, Users, Target } from 'lucide-react'
 import { motion } from 'framer-motion'
 import ScrollAnimation from '../components/ScrollAnimation'
-import { toIconItems } from '../lib/techIcons'
-import TechLogos from '../components/TechLogos'
 import ParticleBackground from '../components/ParticleBackground'
 
 function Pill({ children }: { children: React.ReactNode }) {
@@ -186,7 +184,56 @@ export default function Project() {
               </div>
 
               <div className="mb-6">
-                <TechLogos items={toIconItems(stack)} />
+                <div className="flex flex-wrap gap-2">
+                  {stack.map((tech) => {
+                    // Simple icon mapping
+                    let iconSrc = null;
+                    const techLower = tech.toLowerCase();
+                    
+                    if (techLower.includes('react')) iconSrc = '/images/tech-icons/icons-png/react.png';
+                    else if (techLower.includes('typescript')) iconSrc = '/images/tech-icons/icons-png/typescript.png';
+                    else if (techLower.includes('node')) iconSrc = '/images/tech-icons/icons-png/nodejs.png';
+                    else if (techLower.includes('express')) iconSrc = '/images/tech-icons/icons-png/expressjs.png';
+                    else if (techLower.includes('mongodb')) iconSrc = '/images/tech-icons/icons-png/mongodb.png';
+                    else if (techLower.includes('tailwind')) iconSrc = '/images/tech-icons/icons-png/tailwindcss.png';
+                    else if (techLower.includes('jwt')) iconSrc = '/images/tech-icons/icons-png/jwt.png';
+                    else if (techLower.includes('fullcalendar')) iconSrc = '/images/tech-icons/icons-png/fullcalendar.png';
+                    else if (techLower.includes('react query')) iconSrc = '/images/tech-icons/icons-png/react-query.png';
+                    else if (techLower.includes('unity')) iconSrc = '/images/tech-icons/icons-png/unity.png';
+                    else if (techLower.includes('c#')) iconSrc = '/images/tech-icons/icons-png/csharp.png';
+                    else if (techLower.includes('blender')) iconSrc = '/images/tech-icons/icons-png/blender.png';
+                    else if (techLower.includes('photoshop')) iconSrc = '/images/tech-icons/icons-png/photoshop.png';
+                    else if (techLower.includes('figma')) iconSrc = '/images/tech-icons/icons-png/figma.png';
+                    else if (techLower.includes('design')) iconSrc = '/images/tech-icons/icons-png/design.png';
+                    else if (techLower.includes('vite')) iconSrc = '/images/tech-icons/icons-png/vite.png';
+                    else if (techLower.includes('docker')) iconSrc = '/images/tech-icons/icons-png/docker.png';
+                    else if (techLower.includes('postgresql')) iconSrc = '/images/tech-icons/icons-png/postgresql.png';
+                    else if (techLower.includes('redis')) iconSrc = '/images/tech-icons/icons-png/redis.png';
+                    else if (techLower.includes('socket')) iconSrc = '/images/tech-icons/icons-png/socketio.png';
+                    else if (techLower.includes('expo')) iconSrc = '/images/tech-icons/icons-png/expo.png';
+                    else if (techLower.includes('prisma')) iconSrc = '/images/tech-icons/icons-png/prisma.png';
+                    else if (techLower.includes('stripe')) iconSrc = '/images/tech-icons/icons-png/stripe.png';
+                    else if (techLower.includes('notification')) iconSrc = '/images/tech-icons/icons-png/notification.png';
+                    else if (techLower.includes('security') || techLower.includes('bcrypt')) iconSrc = '/images/tech-icons/icons-png/security.png';
+                    else if (techLower.includes('framer')) iconSrc = '/images/tech-icons/icons-png/framer.png';
+                    
+                    return (
+                      <div key={tech} className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-700 text-slate-300 text-sm">
+                        {iconSrc && (
+                          <img 
+                            src={iconSrc} 
+                            alt={tech}
+                            className="w-4 h-4"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
+                        )}
+                        <span className="font-medium">{tech}</span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
 
               {summary && (
@@ -400,29 +447,53 @@ export default function Project() {
               <Users size={24} style={{ color: 'var(--theme-primary)' }} />
               <h2 className="text-2xl font-bold" style={{ color: 'var(--theme-text)' }}>Project Gallery</h2>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {visuals.gallery.map((src, i) => (
-                <motion.div 
-                  key={src} 
-                  className="overflow-hidden rounded-3xl shadow-lg"
-                  style={{ border: '1px solid var(--theme-border)' }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                >
+                <div key={i} className="relative">
                   <img
                     src={src}
                     alt={`${title} screenshot ${i + 1}`}
-                    className="h-64 w-full object-cover transition-transform duration-500 hover:scale-110"
-                    loading="lazy"
+                    className="w-full h-48 object-cover rounded-lg"
+                    style={{ 
+                      backgroundColor: '#f0f0f0',
+                      border: '1px solid #ccc'
+                    }}
+                    onLoad={() => {
+                      console.log(`✅ Image ${i + 1} loaded: ${src}`);
+                    }}
+                    onError={(e) => {
+                      console.log(`❌ Image ${i + 1} failed: ${src}`);
+                      // Hide the broken image
+                      e.currentTarget.style.display = 'none';
+                    }}
                   />
-                </motion.div>
+                  <div className="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                    {i + 1}
+                  </div>
+                </div>
               ))}
             </div>
           </motion.section>
         </ScrollAnimation>
-      ) : null}
+      ) : (
+        <ScrollAnimation direction="up" delay={1.0}>
+          <motion.section 
+            className="space-y-6"
+            initial={{ opacity: 0, y: 12 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.45 }}
+          >
+            <div className="text-center py-12">
+              <div className="text-lg text-gray-500 mb-4">
+                Debug: No gallery images found for this project
+              </div>
+              <div className="text-sm text-gray-400">
+                visuals: {JSON.stringify(visuals, null, 2)}
+              </div>
+            </div>
+          </motion.section>
+        </ScrollAnimation>
+      )}
 
       {/* Bottom back link */}
       <ScrollAnimation direction="up" delay={1.2}>

@@ -1,86 +1,32 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink, Github, Play, Code, Server, Gamepad2 } from 'lucide-react'
+import { projects as projectData } from '../data/projects'
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all')
 
-  const projects = [
-    {
-      id: 1,
-      title: 'E-Commerce API Platform',
-      description: 'A comprehensive e-commerce backend API built with Node.js, Express, and MongoDB. Features include user authentication, product management, order processing, and payment integration.',
-      image: '/images/ecommerce-api.jpg',
-      category: 'backend',
-      technologies: ['Node.js', 'Express', 'MongoDB', 'JWT', 'Stripe API', 'Docker'],
-      liveUrl: 'https://ecommerce-api-demo.vercel.app',
-      githubUrl: 'https://github.com/Sameeryadav12/ecommerce-api',
-      featured: true
-    },
-    {
-      id: 2,
-      title: 'React Portfolio Dashboard',
-      description: 'A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. Features smooth animations, dark mode, and a contact form with email integration.',
-      image: '/images/portfolio-dashboard.jpg',
-      category: 'frontend',
-      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vite'],
-      liveUrl: 'https://sameer-portfolio.vercel.app',
-      githubUrl: 'https://github.com/Sameeryadav12/portfolio',
-      featured: true
-    },
-    {
-      id: 3,
-      title: '3D Balance Game',
-      description: 'An immersive 3D physics-based puzzle game developed in Unity. Players must balance objects on platforms while navigating through challenging levels with realistic physics.',
-      image: '/images/balance-3d-thumbnail.png',
-      category: 'gamedev',
-      technologies: ['Unity 3D', 'C#', 'Blender', 'Unity Physics', 'Cinemachine'],
-      liveUrl: 'https://sameer-games.itch.io/balance-3d',
-      githubUrl: 'https://github.com/Sameeryadav12/balance-3d-game',
-      featured: true
-    },
-    {
-      id: 4,
-      title: 'Real-time Chat Application',
-      description: 'A full-stack real-time chat application with Socket.io, featuring private messaging, group chats, file sharing, and online status indicators.',
-      image: '/images/chat-app.jpg',
-      category: 'fullstack',
-      technologies: ['React', 'Node.js', 'Socket.io', 'MongoDB', 'Express', 'Multer'],
-      liveUrl: 'https://chat-app-demo.vercel.app',
-      githubUrl: 'https://github.com/Sameeryadav12/chat-app',
-      featured: false
-    },
-    {
-      id: 5,
-      title: 'Task Management API',
-      description: 'A robust task management API with advanced features like project organization, team collaboration, deadline tracking, and comprehensive reporting.',
-      image: '/images/task-api.jpg',
-      category: 'backend',
-      technologies: ['Node.js', 'Express', 'PostgreSQL', 'Prisma', 'Redis', 'JWT'],
-      liveUrl: 'https://task-api-demo.vercel.app',
-      githubUrl: 'https://github.com/Sameeryadav12/task-management-api',
-      featured: false
-    },
-    {
-      id: 6,
-      title: 'Call-Tech Mobile App',
-      description: 'A mobile application for managing business calls and customer interactions, built with React Native and integrated with a Node.js backend.',
-      image: '/images/call-tech.jpg',
-      category: 'mobile',
-      technologies: ['React Native', 'Node.js', 'MongoDB', 'Expo', 'Push Notifications'],
-      liveUrl: 'https://call-tech-app.vercel.app',
-      githubUrl: 'https://github.com/Sameeryadav12/call-tech-app',
-      featured: false
-    }
-  ]
+  // Use the real project data from projects.ts
+  const projects = projectData.map((project, index) => ({
+    id: index + 1,
+    title: project.title,
+    description: project.summary,
+    image: project.visuals?.thumb || '/images/default-project.jpg',
+    category: project.categories?.[0]?.toLowerCase() || 'web',
+    technologies: project.stack,
+    liveUrl: project.links?.demo || '',
+    githubUrl: project.links?.repo || '',
+    featured: index < 3 // First 3 projects are featured
+  }))
 
   const categories = [
     { id: 'all', name: 'All Projects', icon: Code },
+    { id: 'web', name: 'Web', icon: Code },
     { id: 'backend', name: 'Backend', icon: Server },
-    { id: 'frontend', name: 'Frontend', icon: Code },
-    { id: 'fullstack', name: 'Full Stack', icon: ExternalLink },
-    { id: 'gamedev', name: 'Game Dev', icon: Gamepad2 },
-    { id: 'mobile', name: 'Mobile', icon: Play }
+    { id: 'full-stack', name: 'Full Stack', icon: ExternalLink },
+    { id: 'game', name: 'Game', icon: Gamepad2 },
+    { id: 'unity', name: 'Unity', icon: Gamepad2 },
+    { id: 'education', name: 'Education', icon: Play }
   ]
 
   const filteredProjects = activeFilter === 'all' 
@@ -140,24 +86,32 @@ const Projects = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="glass-card overflow-hidden group hover:bg-white/10 transition-all duration-300"
+                className="glass-card overflow-hidden group hover:bg-white/10 transition-all duration-300 flex flex-col h-full min-h-[600px]"
               >
                 {/* Project Image */}
                 <div className="relative h-48 bg-gradient-to-br from-blue-500/20 to-purple-500/20 overflow-hidden">
-                  <div className="absolute inset-0 bg-slate-800/50 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        {project.category === 'gamedev' ? (
-                          <Gamepad2 className="h-8 w-8 text-blue-400" />
-                        ) : project.category === 'backend' ? (
-                          <Server className="h-8 w-8 text-blue-400" />
-                        ) : (
-                          <Code className="h-8 w-8 text-blue-400" />
-                        )}
+                  {project.image && project.image !== '/images/default-project.jpg' ? (
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-slate-800/50 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                          {project.category === 'game' || project.category === 'unity' ? (
+                            <Gamepad2 className="h-8 w-8 text-blue-400" />
+                          ) : project.category === 'backend' ? (
+                            <Server className="h-8 w-8 text-blue-400" />
+                          ) : (
+                            <Code className="h-8 w-8 text-blue-400" />
+                          )}
+                        </div>
+                        <span className="text-slate-400 text-sm">{project.category.toUpperCase()}</span>
                       </div>
-                      <span className="text-slate-400 text-sm">{project.category.toUpperCase()}</span>
                     </div>
-                  </div>
+                  )}
                   {project.featured && (
                     <div className="absolute top-4 right-4 bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
                       Featured
@@ -166,33 +120,68 @@ const Projects = () => {
                 </div>
 
                 {/* Project Content */}
-                <div className="p-6">
+                <div className="p-6 flex flex-col h-full">
                   <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-slate-400 mb-4 text-sm leading-relaxed">
+                  <p className="text-slate-400 mb-4 text-sm leading-relaxed min-h-[3rem]">
                     {project.description}
                   </p>
 
-                  {/* Technologies */}
+                  {/* Technologies - Icon Display */}
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies.slice(0, 4).map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-slate-700 text-slate-300 text-xs rounded-full"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 4 && (
-                      <span className="px-3 py-1 bg-slate-700 text-slate-300 text-xs rounded-full">
-                        +{project.technologies.length - 4} more
-                      </span>
-                    )}
+                    {project.technologies.map((tech) => {
+                      // Simple icon mapping
+                      let iconSrc = null;
+                      const techLower = tech.toLowerCase();
+                      
+                      if (techLower.includes('react')) iconSrc = '/images/tech-icons/icons-png/react.png';
+                      else if (techLower.includes('typescript')) iconSrc = '/images/tech-icons/icons-png/typescript.png';
+                      else if (techLower.includes('node')) iconSrc = '/images/tech-icons/icons-png/nodejs.png';
+                      else if (techLower.includes('express')) iconSrc = '/images/tech-icons/icons-png/expressjs.png';
+                      else if (techLower.includes('mongodb')) iconSrc = '/images/tech-icons/icons-png/mongodb.png';
+                      else if (techLower.includes('tailwind')) iconSrc = '/images/tech-icons/icons-png/tailwindcss.png';
+                      else if (techLower.includes('jwt')) iconSrc = '/images/tech-icons/icons-png/jwt.png';
+                      else if (techLower.includes('fullcalendar')) iconSrc = '/images/tech-icons/icons-png/fullcalendar.png';
+                      else if (techLower.includes('react query')) iconSrc = '/images/tech-icons/icons-png/react-query.png';
+                      else if (techLower.includes('unity')) iconSrc = '/images/tech-icons/icons-png/unity.png';
+                      else if (techLower.includes('c#')) iconSrc = '/images/tech-icons/icons-png/csharp.png';
+                      else if (techLower.includes('blender')) iconSrc = '/images/tech-icons/icons-png/blender.png';
+                      else if (techLower.includes('photoshop')) iconSrc = '/images/tech-icons/icons-png/photoshop.png';
+                      else if (techLower.includes('figma')) iconSrc = '/images/tech-icons/icons-png/figma.png';
+                      else if (techLower.includes('design')) iconSrc = '/images/tech-icons/icons-png/design.png';
+                      else if (techLower.includes('vite')) iconSrc = '/images/tech-icons/icons-png/vite.png';
+                      else if (techLower.includes('docker')) iconSrc = '/images/tech-icons/icons-png/docker.png';
+                      else if (techLower.includes('postgresql')) iconSrc = '/images/tech-icons/icons-png/postgresql.png';
+                      else if (techLower.includes('redis')) iconSrc = '/images/tech-icons/icons-png/redis.png';
+                      else if (techLower.includes('socket')) iconSrc = '/images/tech-icons/icons-png/socketio.png';
+                      else if (techLower.includes('expo')) iconSrc = '/images/tech-icons/icons-png/expo.png';
+                      else if (techLower.includes('prisma')) iconSrc = '/images/tech-icons/icons-png/prisma.png';
+                      else if (techLower.includes('stripe')) iconSrc = '/images/tech-icons/icons-png/stripe.png';
+                      else if (techLower.includes('notification')) iconSrc = '/images/tech-icons/icons-png/notification.png';
+                      else if (techLower.includes('security') || techLower.includes('bcrypt')) iconSrc = '/images/tech-icons/icons-png/security.png';
+                      else if (techLower.includes('framer')) iconSrc = '/images/tech-icons/icons-png/framer.png';
+                      
+                      return (
+                        <div key={tech} className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-700 text-slate-300 text-sm">
+                          {iconSrc && (
+                            <img 
+                              src={iconSrc} 
+                              alt={tech}
+                              className="w-4 h-4"
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                              }}
+                            />
+                          )}
+                          <span className="font-medium">{tech}</span>
+                        </div>
+                      );
+                    })}
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-4 mt-auto">
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}

@@ -19,6 +19,22 @@ export default function Resume() {
     setTimeout(() => setIsLoading(false), 1000)
   }
 
+  const handleViewResume = () => {
+    // Method 1: Try to open PDF in new tab with specific parameters
+    const pdfUrl = `${RESUME_PATH}#view=FitH&toolbar=1&navpanes=1&scrollbar=1`
+    
+    // Create a temporary link element to force viewing instead of downloading
+    const link = document.createElement('a')
+    link.href = pdfUrl
+    link.target = '_blank'
+    link.rel = 'noopener noreferrer'
+    
+    // Add to DOM temporarily and click
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   const handlePdfError = () => {
     setPdfError(true)
     setIsLoading(false)
@@ -81,18 +97,16 @@ export default function Resume() {
                   <p className="text-center mb-4" style={{ color: 'var(--theme-textSecondary)' }}>
                     The PDF preview couldn't be loaded. Please use the download button to view the resume.
                   </p>
-                  <motion.a
-                    href={RESUME_PATH}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium"
+                  <motion.button
+                    onClick={handleViewResume}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium cursor-pointer"
                     style={{ background: 'var(--theme-gradient-primary)' }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     <Eye size={18} />
                     View Resume
-                  </motion.a>
+                  </motion.button>
                 </div>
               ) : (
                 <>
@@ -106,11 +120,12 @@ export default function Resume() {
                     </div>
                   )}
                   <iframe
-                    src={`${RESUME_PATH}#toolbar=0&navpanes=0&scrollbar=0`}
+                    src={`${RESUME_PATH}?view=FitH&toolbar=0&navpanes=0&scrollbar=0`}
                     className="w-full h-full"
                     title="Resume Preview"
                     onLoad={() => setIsLoading(false)}
                     onError={handlePdfError}
+                    sandbox="allow-same-origin allow-scripts"
                   />
                 </>
               )}
@@ -129,11 +144,9 @@ export default function Resume() {
               </h3>
               
               <div className="space-y-3">
-                <motion.a
-                  href={RESUME_PATH}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-3 w-full p-4 rounded-2xl border transition-all duration-200 hover:scale-105"
+                <motion.button
+                  onClick={handleViewResume}
+                  className="flex items-center gap-3 w-full p-4 rounded-2xl border transition-all duration-200 hover:scale-105 cursor-pointer"
                   style={{ 
                     borderColor: 'var(--theme-border)',
                     backgroundColor: 'var(--theme-background)'
@@ -150,7 +163,7 @@ export default function Resume() {
                       Opens in new tab
                     </div>
                   </div>
-                </motion.a>
+                </motion.button>
 
                 <motion.a
                   href={RESUME_PATH}

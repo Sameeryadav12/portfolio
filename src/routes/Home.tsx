@@ -140,9 +140,8 @@ export default function Home() {
               <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
             </motion.a>
             
-            <motion.a
-              href="/resume"
-              className="group inline-flex items-center gap-3 px-10 py-5 rounded-2xl border font-semibold text-lg relative overflow-hidden"
+            <motion.div
+              className="group inline-flex items-center gap-3 px-10 py-5 rounded-2xl border font-semibold text-lg relative overflow-hidden cursor-pointer"
               style={{ 
                 borderColor: 'var(--theme-border)',
                 color: 'var(--theme-textSecondary)',
@@ -150,12 +149,13 @@ export default function Home() {
               }}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => window.open('/cv/Sameer_Yadav_Resume.pdf', '_blank')}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               <Download size={22} />
               Download Resume
               <Target size={22} className="group-hover:scale-110 transition-transform" />
-            </motion.a>
+            </motion.div>
           </motion.div>
 
           {/* Enhanced Social Links */}
@@ -167,7 +167,7 @@ export default function Home() {
           >
             {[
               { icon: Github, href: 'https://github.com/Sameeryadav12', label: 'GitHub', color: 'hover:text-gray-400' },
-              { icon: Linkedin, href: 'https://www.linkedin.com/in/sameer-yadav-5502a4203/', label: 'LinkedIn', color: 'hover:text-blue-400' },
+              { icon: Linkedin, href: 'https://www.linkedin.com/in/sameer-yadav1/', label: 'LinkedIn', color: 'hover:text-blue-400' },
               { icon: Mail, href: 'mailto:ysameer0303@gmail.com', label: 'Email', color: 'hover:text-red-400' }
             ].map(({ icon: Icon, href, label, color }, index) => (
               <motion.a
@@ -725,31 +725,33 @@ export default function Home() {
             </p>
             
             <div className="flex flex-wrap gap-6 justify-center">
-              <motion.a
-                href="/contact"
-                className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl text-white font-semibold text-xl shadow-2xl"
-                style={{ background: 'var(--theme-gradient-primary)' }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Mail size={24} />
-                Get In Touch
-                <ArrowRight size={24} />
-              </motion.a>
+              <Link to="/contact">
+                <motion.div
+                  className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl text-white font-semibold text-xl shadow-2xl cursor-pointer"
+                  style={{ background: 'var(--theme-gradient-primary)' }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Mail size={24} />
+                  Get In Touch
+                  <ArrowRight size={24} />
+                </motion.div>
+              </Link>
               
-              <motion.a
-                href="/about"
-                className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl border font-semibold text-xl"
-                style={{ 
-                  borderColor: 'var(--theme-border)',
-                  color: 'var(--theme-textSecondary)',
-                  backgroundColor: 'var(--theme-surface)'
-                }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Learn More About Me
-              </motion.a>
+              <Link to="/about">
+                <motion.div
+                  className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl border font-semibold text-xl cursor-pointer"
+                  style={{ 
+                    borderColor: 'var(--theme-border)',
+                    color: 'var(--theme-textSecondary)',
+                    backgroundColor: 'var(--theme-surface)'
+                  }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Learn More About Me
+                </motion.div>
+              </Link>
             </div>
           </div>
         </motion.section>

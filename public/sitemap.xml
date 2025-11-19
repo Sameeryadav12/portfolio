@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://your-domain.tld/</loc></url>
-<url><loc>https://your-domain.tld/projects</loc></url>
-<url><loc>https://your-domain.tld/about</loc></url>
-<url><loc>https://your-domain.tld/resume</loc></url>
-<url><loc>https://your-domain.tld/contact</loc></url>
-<url><loc>https://your-domain.tld/blog</loc></url>
-<url><loc>https://your-domain.tld/blog/first-post</loc></url>
-<url><loc>https://your-domain.tld/blog/hello-world</loc></url>
-<url><loc>https://your-domain.tld/blog/unity-level-design</loc></url>
+<url><loc>https://portfolio-rho-ochre-79.vercel.app/</loc></url>
+<url><loc>https://portfolio-rho-ochre-79.vercel.app/projects</loc></url>
+<url><loc>https://portfolio-rho-ochre-79.vercel.app/about</loc></url>
+<url><loc>https://portfolio-rho-ochre-79.vercel.app/resume</loc></url>
+<url><loc>https://portfolio-rho-ochre-79.vercel.app/contact</loc></url>
+<url><loc>https://portfolio-rho-ochre-79.vercel.app/blog</loc></url>
+<url><loc>https://portfolio-rho-ochre-79.vercel.app/blog/first-post</loc></url>
+<url><loc>https://portfolio-rho-ochre-79.vercel.app/blog/hello-world</loc></url>
+<url><loc>https://portfolio-rho-ochre-79.vercel.app/blog/unity-level-design</loc></url>
 </urlset>

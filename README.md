@@ -9,7 +9,7 @@ A modern, professional portfolio website built with React, TypeScript, and Vite.
 
 ## ✨ Live Demo
 
-🌐 **[View Live Portfolio](https://sameer-portfolio.vercel.app)**
+🌐 **[View Live Portfolio](https://portfolio-rho-ochre-79.vercel.app)**
 
 ## 🚀 Features
 
@@ -160,7 +160,7 @@ While this is a personal portfolio, contributions are welcome:
 ## 📞 Contact
 
 - **Email**: rishisameer7@gmail.com
-- **Portfolio**: [Live Site](https://sameer-portfolio.vercel.app)
+- **Portfolio**: [Live Site](https://portfolio-rho-ochre-79.vercel.app)
 - **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
 - **GitHub**: [Your GitHub Profile](https://github.com/Sameeryadav12)
 

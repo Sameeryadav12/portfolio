@@ -3,7 +3,7 @@ import { readdirSync } from 'fs';
 import { writeFileSync } from 'fs';
 import { join, basename } from 'path';
 
-const SITE = process.env.SITE_URL || 'https://your-domain.tld';
+const SITE = process.env.SITE_URL || 'https://portfolio-rho-ochre-79.vercel.app';
 
 const staticRoutes = ['/', '/projects', '/about', '/resume', '/contact', '/blog'];
 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
 <title>Sameer Yadav — Notes</title>
-<link>https://portfolio-cyan-nine-94.vercel.app//blog</link>
+<link>https://portfolio-rho-ochre-79.vercel.app/blog</link>
 <description>Notes from building software and games</description>
 
 <item>
   <title>Lessons from shipping a 12-level Unity game</title>
-  <link>https://portfolio-cyan-nine-94.vercel.app//blog/unity-level-design</link>
-  <guid>https://portfolio-cyan-nine-94.vercel.app//blog/unity-level-design</guid>
+  <link>https://portfolio-rho-ochre-79.vercel.app/blog/unity-level-design</link>
+  <guid>https://portfolio-rho-ochre-79.vercel.app/blog/unity-level-design</guid>
   <pubDate>Sat, 14 May 2022 00:00:00 GMT</pubDate>
   <description>
 Designing difficulty ramps, physics tuning, and performance tips learned while shipping Balance 3D…
@@ -15,8 +15,8 @@ Designing difficulty ramps, physics tuning, and performance tips learned while s
 </item>
 <item>
   <title>Hello World</title>
-  <link>https://portfolio-cyan-nine-94.vercel.app//blog/hello-world</link>
-  <guid>https://portfolio-cyan-nine-94.vercel.app//blog/hello-world</guid>
+  <link>https://portfolio-rho-ochre-79.vercel.app/blog/hello-world</link>
+  <guid>https://portfolio-rho-ochre-79.vercel.app/blog/hello-world</guid>
   <pubDate>Sun, 05 Oct 2025 00:00:00 GMT</pubDate>
   <description>
 This is your first blog post!  
@@ -25,8 +25,8 @@ Everything is working fine 🎉
 </item>
 <item>
   <title>Building a KPI dashboard for a service business</title>
-  <link>https://portfolio-cyan-nine-94.vercel.app//blog/first-post</link>
-  <guid>https://portfolio-cyan-nine-94.vercel.app//blog/first-post</guid>
+  <link>https://portfolio-rho-ochre-79.vercel.app/blog/first-post</link>
+  <guid>https://portfolio-rho-ochre-79.vercel.app/blog/first-post</guid>
   <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
   <description>
 I built KPI cards (Open/Closed/Overdue) and a jobs pipeline that cut manual work by 30%+. Here’s a quick overview of how the data flows…
